@@ -6,5 +6,5 @@
 
 
 function testLibary() {
-    alert("library fetched");
+    alert("library fetched!");
 }
