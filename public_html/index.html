@@ -17,12 +17,13 @@
         <script type="text/javascript">
             $(window).load(function () {
                 //loadMap();
-                loadGeofences();
+                //loadGeofences();
             });
 
             function loadMap() {
                 new Maplace({
                     show_markers: true,
+                    
                     locations: [{
                             lat: 45.9,
                             lon: 10.9,
@@ -77,7 +78,7 @@
                             editable: true
                         },
                         title: 'Editable geofence',
-                        html: 'Edit geofence size and position',
+                        html: '',
                         visible: false,
                         draggable: true
                     }
@@ -113,6 +114,8 @@
 
                 new Maplace({
                     locations: Circles,
+                    controls_on_map:false,
+                    generate_controls:false,
                     map_div: '#gmap',
                     start: 4,
                     view_all_text: 'All Geofences',
@@ -135,10 +138,46 @@
 
 
     <body>
-        <div id="homePage" data-role="page">
+
+        <!-------------------------------HOME PAGE------------------------------------------- -->
+        <div id="homePage" data-role="page" id="bar">
 
             <div id="header" data-role="header" data-theme="a" data-position="fixed">
                 <div id="headerNavbarId" data-role="navbar" >
+                    <ul>
+                        <li><a href="#" data-iconshadow="false" class="ui-btn-active" >Day</a></li>
+                        <li><a href="#" data-iconshadow="false">Week</a></li>
+                        <li><a href="#" data-iconshadow="false">Month</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div role="main" class="ui-content">
+                <h1>Home Page</h1>
+            </div><!-- /content -->
+
+            <!-------------------------------FOOTER------------------------------------------- -->
+            <div data-role="footer" data-theme="a" data-position="fixed">
+                <div id="footerNavbarId" data-role="navbar" >
+                    <ul>
+                        <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext"></a></li>
+                        <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                        <li><a href="#" data-icon="home" data-iconshadow="false"  data-iconpos="notext" class="ui-btn-active"></a></li>
+                        <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                        <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-------------------------------/FOOTER------------------------------------------- -->
+        </div><!-- /page -->
+<!-------------------------------/HOME PAGE------------------------------------------- -->
+        
+        
+        <!-------------------------------EDIT GEOFENCES PAGE------------------------------------------- -->
+        <div id="editGeofencesPage" data-role="page">
+
+            <div id="editGeofencesHeader" data-role="header" data-theme="a" data-position="fixed">
+                <div id="editGeofencesHeaderNavbarId" data-role="navbar" >
                     <ul>
                         <li><a href="#" data-iconshadow="false" class="ui-btn-active" >Day</a></li>
                         <li><a href="#" data-iconshadow="false">Week</a></li>
@@ -153,18 +192,20 @@
                 <div class="gmap" id="gmap" style="width:300px;height:300px;"></div>
                 <p></p>
             </div><!-- /content -->
-
+            <!-------------------------------FOOTER------------------------------------------- -->
             <div data-role="footer" data-theme="a" data-position="fixed">
-                <div id="footerNavbarId" data-role="navbar" >
+                <div id="editGeofencesFooterNavbarId" data-role="navbar" >
                     <ul>
                         <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext"></a></li>
                         <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
-                        <li><a href="#" data-icon="home" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                        <li><a href="#homePage" data-icon="home" data-iconshadow="false"  data-iconpos="notext" ></a></li>
                         <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
-                        <li><a href="#" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                        <li><a onclick="loadGeofences()" href="#" data-icon="tag" data-iconshadow="false"  data-iconpos="notext" class="ui-btn-active" ></a></li>
                     </ul>
                 </div>
-            </div><!-- / home page -->
-        </div>
+            </div>
+            <!-------------------------------/FOOTER------------------------------------------- -->
+        </div> <!-- /  page -->
+        <!-------------------------------/EDIT GEOFENCES PAGE------------------------------------------- -->
     </body>
 </html>
