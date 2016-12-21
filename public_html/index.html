@@ -15,6 +15,8 @@
         <script src="./js/libs/myUtils.js"></script>
 
         <script type="text/javascript">
+            // similar behavior as an HTTP redirect
+window.location.replace("home.html");
             $(window).load(function () {
                 //loadMap();
                 //loadGeofences();
@@ -130,6 +132,7 @@
                                 );
                     }
                 }).Load();
+                //window.reload();//reload page due to map visibility issue (chris)
             }
 
         </script>
@@ -140,7 +143,7 @@
     <body>
 
         <!-------------------------------HOME PAGE------------------------------------------- -->
-        <div id="homePage" data-role="page" id="bar">
+        <div id="homePage" data-role="page">
 
             <div id="header" data-role="header" data-theme="a" data-position="fixed">
                 <div id="headerNavbarId" data-role="navbar" >
