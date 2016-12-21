@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!----------------------------------------- CDN------------------------------------------------->
+       <!-- 
+       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+       
+       <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+       -->
+        <!----------------------------------------- LOCAL ---------------------------------------------->
+        <link rel="stylesheet" href="./js/libs/jquery-mobile/jquery.mobile.css" />
+        <script src="./js/libs/jquery/jquery-2.2.4.js"> </script>
+        <script src="./js/libs/jquery-mobile/jquery.mobile.js"> </script>
+        <link rel="stylesheet" href="./css/tg-theme.css"/>
+        <script src="./js/libs/myUtils.js"></script>
+    </head>
+    <body>
+        <!-------------------------------HOME PAGE------------------------------------------- -->
+        <div id="homePage" data-role="page">
+
+            <div id="header" data-role="header" data-theme="a" data-position="fixed">
+                <div id="headerNavbarId" data-role="navbar" >
+                    <ul>
+                        <li><a href="#" data-iconshadow="false" class="ui-btn-active" >Day</a></li>
+                        <li><a href="#" data-iconshadow="false">Week</a></li>
+                        <li><a href="#" data-iconshadow="false">Month</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div role="main" class="ui-content">
+                <h1>Home Page</h1>
+            </div><!-- /content -->
+
+            <!-------------------------------FOOTER------------------------------------------- -->
+            <div data-role="footer" data-theme="a" data-position="fixed">
+                <div id="footerNavbarId" data-role="navbar" >
+                    <ul>
+                        <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext"></a></li>
+                        <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                        <li><a href="#" data-icon="home" data-iconshadow="false"  data-iconpos="notext" class="ui-btn-active"></a></li>
+                        <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                        <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-------------------------------/FOOTER------------------------------------------- -->
+        </div><!-- /page -->
+<!-------------------------------/HOME PAGE------------------------------------------- -->
+        
+    </body>
+</html>
