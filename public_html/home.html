@@ -48,9 +48,9 @@
                     jsonpCallback: 'receive',
                     data: "time_frame=" + timeFrame,
                     dataType: 'jsonp',
-                  /*  data: {
-                        format: 'jsonp'
-                    },*/
+                    /*  data: {
+                     format: 'jsonp'
+                     },*/
                     contentType: 'application/json',
                     error: function (jqXHR, textStatus, errorThrown) {
                         //window.alert("error");
@@ -96,24 +96,54 @@
             </div>
 
             <div role="main" class="ui-content">
-                <h1>Home Page</h1>
-            </div><!-- /content -->
+                <HR width="50%" noshade style="color: lightgrey" size=2>
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                        <image id='whatsappIconId' src='./images/whatsappIcon.png' style="max-width:10%;" alt='-'/>
+                        <label style="color: #32B92A" id='whatsappSection'>Whatsapp</label>
+                        <image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:10%;" alt='-'/>
+                        <label style="color: graytext" id='whatsappNudeSection'>Nude</label>
+                    </li>
+                </ul>
+                <HR width="100%" noshade style="color: lightgrey" size=2>
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                        <image id='photoIconId' src='./images/photoIcon.png' style="max-width:10%;" alt='-'/>
+                        <label style="color: #FF4333" id='photoSection'>Photo</label>
+                        <image id='photoNudeIconId' src='./images/alertNudeIcon.png' style="max-width:10%;" alt='-'/>
+                        <label style="color: graytext" id='photoNudeSection'>Nude</label>
+                    </li>
+                </ul>
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                    <image id='visitIconId' src='./images/visitIcon.png' style="max-width:10%;" alt='-'/>
+                    <label style="color: #00A1AC" id='visitSection'>Visit</label>
+                    </li>
+                </ul>
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                    <image id='geofenceIconId' src='./images/geofenceIcon.png' style="max-width:10%;" alt='-'/>
+                    <label style="color: #FFA602" id='geofenceSection'>Geofence</label>
+                    </li>
+                </ul>
+                    <HR width="100%" noshade style="color: lightgrey" size=2>
+                    </div><!-- /content -->
 
-            <!-------------------------------FOOTER------------------------------------------- -->
-            <div data-role="footer" data-theme="a" data-position="fixed">
-                <div id="footerNavbarId" data-role="navbar" >
-                    <ul>
-                        <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext"></a></li>
-                        <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
-                        <li><a href="#" data-icon="home" data-iconshadow="false"  data-iconpos="notext" class="ui-btn-active"></a></li>
-                        <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
-                        <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-------------------------------/FOOTER------------------------------------------- -->
-        </div><!-- /page -->
-        <!-------------------------------/HOME PAGE------------------------------------------- -->
+                    <!-------------------------------FOOTER------------------------------------------- -->
+                    <div data-role="footer" data-theme="a" data-position="fixed">
+                        <div id="footerNavbarId" data-role="navbar" >
+                            <ul>
+                                <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext"></a></li>
+                                <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                                <li><a href="#" data-icon="home" data-iconshadow="false"  data-iconpos="notext" class="ui-btn-active"></a></li>
+                                <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                                <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-------------------------------/FOOTER------------------------------------------- -->
+            </div><!-- /page -->
+            <!-------------------------------/HOME PAGE------------------------------------------- -->
 
     </body>
 </html>
