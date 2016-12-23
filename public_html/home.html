@@ -25,13 +25,17 @@
             var homeUrl = "http://92.222.83.28/child/beat.php";
 
             window.onload = function (e) {
-                //console.log("window loaded");
+                /*var jsonString = "{a:1,b:2}";
+                var json = JSON.parse(jsonString);
+                alert(json.a + "aaaaa" + json.b);*/
                 doPost();
             };
 
             $(document).ready(function () {
                 //console.log("document ready");
             });
+            
+            
 
             function doGetHomeInfo(timeFrame) {
                 alert("connecting to " + homeUrl + "timeFrame=" + timeFrame);
@@ -60,6 +64,7 @@
                 $.ajax({
                     url: 'http://92.222.83.28/parent/home2.php?time_frame=day',
                      //url: 'file:///home/chris/proxy/home2.php',
+                     
                     type: 'GET',
                     crossDomain: true,
                     jsonp: 'callback',
@@ -80,131 +85,7 @@
                 });
             }
 
-            function doPost2() {
-                alert("doPost2");
-                $.ajax({
-                    type: "GET",
-                    url: 'http://92.222.83.28/child/beat.php',
-                    data: {
-                        format: 'json'
-                    },
-                    success: function (response) {
-                        alert('something');
-                    },
-                    error: function (XMLResponse) {
-                        alert("XMLResponse " + XMLResponse.responseText);
-                    }
-                });
-            }
-
-            function errorMsg(result) {
-                if (result.status == 200 && result.statusText == 'OK') {
-                    alert("result.status=" + result.status);
-                } else {
-                    alert("FAILED : " + result.status + ' ' + result.statusText);
-                }
-            }
-
-            function populateHome(jsonObject) {
-                alert(jsonObject);
-            }
-
-
-
-
-
-            function doPost3() {
-
-
-
-                alert("doPost3");
-                $.ajax({
-                    url: 'http://92.222.83.28/child/beat.php?',
-                    jsonpCallback: 'receive',
-                    jsonp: 'callback',
-                    contentType: 'application/json',
-                    dataType: 'jsonp',
-                    crossDomain: true,
-                    cache: false,
-                    success: function (json) {
-                        alert("success=" + json);
-                    },
-                    error: function (e) {
-                        alert("error=" + e.message);
-                    }
-                }
-                );
-            }
-
-
-            function AjaxFeed() {
-
-                return $.ajax({
-                    url: 'http://92.222.83.28/child/beat.php/',
-                    data: {something: true},
-                        dataType: 'jsonp',
-                        /* Very important */
-                        contentType: 'application/json',
-                    });
-                }
-
-                function GetData()
-                        AjaxFeed()
-
-                        /* Everything worked okay. Hooray */
-                        .done(function (data) {
-                            alert("done data" + data);
-                            return data;
-                        })
-
-                        /* Okay jQuery is stupid manually fix things */
-                        .fail(function (jqXHR) {
-                            alert("fail");
-                    var responseText = $.httpData(jqXHR);
-                        alert("jqXHR=" + responseText);
-                            /* Build HTML and update */
-                            var data = jQuery.parseJSON(jqXHR.responseText);
-
-                            return data;
-                    }
-                    )
-            ;
-
-
-
-            /*
-             
-             (function($) {
-             var url = "https://www.googleapis.com/books/v1/volumes/zyTCAlFPjgYC";
-             //var url = "http://92.222.83.28/child/beat.php/";
-             $.ajax({
-             type: 'GET',
-             url: url,
-             // JSONP always async?
-             //async: false,
-             jsonp: "callback",
-             jsonpCallback: 'jsonCallback',
-             contentType: "application/json",
-             dataType: 'jsonp',
-             crossDomain: true,
-             //success always called even when jsonpCallback is specified?
-             success: function(json) {
-             alert("success");
-             console.dir(json);
-             },
-             // Error never called?
-             error: function(e) {
-             alert("error " + e.message);
-             console.log(e.message);
-             }
-             });
-             })(jQuery);
-             
-             function jsonCallback(json) {
-             alert("callback "+ json.volumeInfo.title);
-             
-             }    */
-
+          
         </script>
 
     </head>
