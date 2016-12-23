@@ -27,7 +27,7 @@
             //var url = "https://www.googleapis.com/books/v1/volumes/zyTCAlFPjgYC";
 
             window.onload = function (e) {
-                //doGetHomeInfo("day");
+                doGetHomeInfo("day");
             };
 
             $(document).ready(function () {
@@ -36,6 +36,9 @@
         </script>
 
         <script language="javascript">
+            function ciao() {
+                //window.alert("callback ciao");
+            }
             function doGetHomeInfo(timeFrame) {
                 //window.alert("doGetHomeInfo " + timeFrame);
                 $.ajax({
@@ -45,7 +48,7 @@
                     type: 'GET',
                     crossDomain: true,
                     jsonp: 'callback',
-                    jsonpCallback: 'receive',
+                    jsonpCallback: 'ciao',
                     data: "time_frame=" + timeFrame,
                     dataType: 'jsonp',
                     /*  data: {
@@ -53,7 +56,7 @@
                      },*/
                     contentType: 'application/json',
                     error: function (jqXHR, textStatus, errorThrown) {
-                        //window.alert("error");
+                        window.alert("error");
                         //alert("responseText=" + $.httpData(jqXHR) + " textStatus=" + textStatus + " errorThrown=" + errorThrown);
 
                         var jsonHomeDay = JSON.parse("{\"meta\":[],\"data\":{\"notifications\":null,\"whatsapp\":{\"count\":114,\"latests\":{\"count\":12,\"has_text\":true,\"has_image\":true,\"has_video\":true,\"has_audio\":true,\"list\":[{\"id\":\"374707453\",\"first_name\":\"Sara\",\"last_name\":\"\",\"phone_number\":\"34634932907\"},{\"id\":\"446329876\",\"first_name\":\"Martina\",\"last_name\":\"\",\"phone_number\":\"34634501533\"},{\"id\":\"733818272\",\"first_name\":\"Valentina\",\"last_name\":\"\",\"phone_number\":\"34634568032\"},{\"id\":\"1883492084\",\"first_name\":\"Alessia\",\"last_name\":\"\",\"phone_number\":\"34634248145\"},{\"id\":\"1373938670\",\"is_group\":true,\"title\":\"Home\"}]},\"increase\":{\"list\":[{\"id\":\"1249076410\",\"first_name\":\"Francesca\",\"last_name\":\"\",\"phone_number\":\"34634379805\"},{\"id\":\"1673278242\",\"first_name\":\"Federica\",\"last_name\":\"\",\"phone_number\":\"34634118632\"},{\"id\":\"374707453\",\"first_name\":\"Sara\",\"last_name\":\"\",\"phone_number\":\"34634493031\"},{\"id\":\"1467554728\",\"is_group\":true,\"title\":\"Piano\"},{\"id\":\"1320340042\",\"is_group\":true,\"title\":\"Bar\"},{\"id\":\"2117263245\",\"is_group\":true,\"title\":\"School\"}]},\"nude\":{\"count\":2}},\"photo\":{\"count\":88,\"has_image\":true,\"has_video\":true,\"places\":{\"count\":3,\"list\":[{\"id\":\"1\",\"name\":\"Adeje\"},{\"id\":\"2\",\"name\":\"Arona\"},{\"id\":\"3\",\"name\":\"aaaaaaaaaaaaaaa\"}]},\"nude\":{\"count\":2}},\"visit\":{\"count\":85,\"places\":{\"count\":23,\"list\":[{\"id\":\"2\",\"name\":\"LosAngeles\"},{\"id\":\"1\",\"name\":\"BeverlyHills\"},{\"id\":\"2\",\"name\":\"Napa\"},{\"id\":\"1\",\"name\":\"PaloAlto\"},{\"id\":\"1\",\"name\":\"MountainView\"},{\"id\":\"2\",\"name\":\"LasVegas\"},{\"id\":\"2\",\"name\":\"Seattle\"},{\"id\":\"2\",\"name\":\"Adeje\"},{\"id\":\"2\",\"name\":\"PlayaParaiso\"},{\"id\":\"1\",\"name\":\"CallaoSalvaje\"}]}},\"geofence\":{\"count\":32,\"geofences\":[{\"id\":\"Lincontro\",\"name\":\"RistoranteL'Incontro\",\"latitude\":28.120483,\"longitude\":-16.7775494,\"radius\":100,\"enter\":true,\"leave\":true,\"week\":6,\"start\":\"1156\",\"stop\":\"2126\",\"count\":3},{\"id\":\"Ale\",\"name\":\"Ale\",\"latitude\":28.120483,\"longitude\":-16.7775494,\"radius\":100,\"enter\":true,\"leave\":true,\"week\":2,\"start\":\"0455\",\"stop\":\"2012\",\"count\":7},{\"id\":\"SiamMall\",\"name\":\"CentroComercialSiamMall\",\"latitude\":28.120483,\"longitude\":-16.7775494,\"radius\":100,\"enter\":true,\"leave\":true,\"week\":105,\"start\":\"1043\",\"stop\":\"2312\",\"count\":5},{\"id\":\"Michele\",\"name\":\"UfficiodiMichele\",\"latitude\":28.120483,\"longitude\":-16.7775494,\"radius\":100,\"enter\":true,\"leave\":true,\"week\":76,\"start\":\"0810\",\"stop\":\"2135\",\"count\":2}]}},\"pagination\":{\"eof\":true}}");
@@ -68,15 +71,27 @@
                             populateHome(jsonHomeMonth);
                     },
                     success: function (data, textStatus, jqXHR) {
-                        alert("success data " + data);
-                        var jsonObject = eval('(' + data + ')');
-                        populateHome(jsonObject);
+                        //alert("success data " + data);
+                        //var jsonObject = eval('(' + data + ')');
+                        populateHome(data);
+                        //alert();
                     }
                 });
             }
 
+            function roundPlus(value) {
+                return (Math.floor(value / 10)) * 10 + "+";
+            }
+            
+            function buildWhatsappLatestList(jsonHome) {
+               var latestAR = jsonHome.data.whatsapp.latests.list;
+               window.alert(latestAR.length);
+            }
+
             function populateHome(jsonHome) {
+                buildWhatsappLatestList(jsonHome);
                 window.alert("" + jsonHome.data.whatsapp.count);
+                $("#whatsappSectionLabelCountId").html(roundPlus(jsonHome.data.whatsapp.count));
             }
         </script>
 
@@ -100,7 +115,8 @@
                 <ul data-role="listview" data-inset="true">
                     <li>
                         <image id='whatsappIconId' src='./images/whatsappIcon.png' style="max-width:10%;" alt='-'/>
-                        <label style="color: #32B92A" id='whatsappSection'>Whatsapp</label>
+                        <label style="color: #32B92A" id='whatsappSectionLabelId'>Whatsapp</label>
+                        <label style='color:lightgrey' id='whatsappSectionLabelCountId'>-</label>
                         <image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:10%;" alt='-'/>
                         <label style="color: graytext" id='whatsappNudeSection'>Nude</label>
                     </li>
@@ -116,34 +132,34 @@
                 </ul>
                 <ul data-role="listview" data-inset="true">
                     <li>
-                    <image id='visitIconId' src='./images/visitIcon.png' style="max-width:10%;" alt='-'/>
-                    <label style="color: #00A1AC" id='visitSection'>Visit</label>
+                        <image id='visitIconId' src='./images/visitIcon.png' style="max-width:10%;" alt='-'/>
+                        <label style="color: #00A1AC" id='visitSection'>Visit</label>
                     </li>
                 </ul>
                 <ul data-role="listview" data-inset="true">
                     <li>
-                    <image id='geofenceIconId' src='./images/geofenceIcon.png' style="max-width:10%;" alt='-'/>
-                    <label style="color: #FFA602" id='geofenceSection'>Geofence</label>
+                        <image id='geofenceIconId' src='./images/geofenceIcon.png' style="max-width:10%;" alt='-'/>
+                        <label style="color: #FFA602" id='geofenceSection'>Geofence</label>
                     </li>
                 </ul>
-                    <HR width="100%" noshade style="color: lightgrey" size=2>
-                    </div><!-- /content -->
+                <HR width="100%" noshade style="color: lightgrey" size=2>
+            </div><!-- /content -->
 
-                    <!-------------------------------FOOTER------------------------------------------- -->
-                    <div data-role="footer" data-theme="a" data-position="fixed">
-                        <div id="footerNavbarId" data-role="navbar" >
-                            <ul>
-                                <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext"></a></li>
-                                <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
-                                <li><a href="#" data-icon="home" data-iconshadow="false"  data-iconpos="notext" class="ui-btn-active"></a></li>
-                                <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
-                                <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-------------------------------/FOOTER------------------------------------------- -->
-            </div><!-- /page -->
-            <!-------------------------------/HOME PAGE------------------------------------------- -->
+            <!-------------------------------FOOTER------------------------------------------- -->
+            <div data-role="footer" data-theme="a" data-position="fixed">
+                <div id="footerNavbarId" data-role="navbar" >
+                    <ul>
+                        <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext"></a></li>
+                        <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                        <li><a href="#" data-icon="home" data-iconshadow="false"  data-iconpos="notext" class="ui-btn-active"></a></li>
+                        <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                        <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-------------------------------/FOOTER------------------------------------------- -->
+        </div><!-- /page -->
+        <!-------------------------------/HOME PAGE------------------------------------------- -->
 
     </body>
 </html>
