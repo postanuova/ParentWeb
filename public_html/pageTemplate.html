@@ -14,6 +14,17 @@ and open the template in the editor.
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="./js/libs/myUtils.js"></script>
+        <script>
+            //GLOBAL VARIABLES
+            var homeUrl = "http://92.222.83.28/parent/home2.php";
+            
+            window.onload = function (e) {
+                window.alert("window on load");        
+            };
+            $(document).ready(function () {
+                window.alert("document.ready");
+            });
+        </script>
     </head>
     <body>
         <!-------------------------------HOME PAGE------------------------------------------- -->
@@ -47,7 +58,7 @@ and open the template in the editor.
             </div>
             <!-------------------------------/FOOTER------------------------------------------- -->
         </div><!-- /page -->
-<!-------------------------------/HOME PAGE------------------------------------------- -->
-        
+        <!-------------------------------/HOME PAGE------------------------------------------- -->
+
     </body>
 </html>
