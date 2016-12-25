@@ -103,7 +103,7 @@
             function buildWhatsappLatestList(jsonHome) {
                 var latestAR = jsonHome.data.whatsapp.latests.list;
                 var maxCount = Math.min(latestAR.length, 3);
-                var firstNameSTR = "";
+                var firstNameSTR = "&nbsp;&nbsp;&nbsp;";
                 for (i = 0; i < maxCount; i++) {
                     firstNameSTR += latestAR[i].first_name;
                     if (i < maxCount - 1) {
@@ -115,12 +115,20 @@
                 }
                 return firstNameSTR;
             }
+            
+            function buildWhatsappNudeCount(jsonHome) {
+                var nudeCount = jsonHome.data.whatsapp.nude.count;
+                if(nudeCount == 0) return "No nudes detected";
+                if(nudeCount > 0) return nudeCount + " nudes detected";
+            }
 
             function populateHome(jsonHome) {
-                var firstNameSTR = buildWhatsappLatestList(jsonHome);
+                var latestListSTR = buildWhatsappLatestList(jsonHome);
+                var nudeSTR = buildWhatsappNudeCount(jsonHome);
                 $("#whatsappSectionLabelCountId").html(roundPlus(jsonHome.data.whatsapp.count));
                 $("#whatsappNudeSectionLabelCountId").html(jsonHome.data.whatsapp.nude.count);
-                $("#whatsappSectionLabelLatestId").html(firstNameSTR);
+                $("#whatsappSectionLabelLatestListId").html(latestListSTR);
+                $("#whatsappNudeCountId").html(nudeSTR);
             }
         </script>
 
@@ -140,14 +148,24 @@
             </div>
 
             <div role="main"  class="ui-content">
-                <div data-role="collapsible-set"  class='my-collapsible'>
-                    <image id='whatsappIconId' src='./images/whatsappIcon.png' alt='-' style="max-width:20%;"/>
-                    <label style="color: #32B92A" id='whatsappSectionLabelId'>Whatsapp</label>
-                    <label style='color:graytext' id='whatsappSectionLabelCountId'>-</label>
-                    <label style='color:graytext' id='whatsappSectionLabelLatestId' >-</label>
-                    <image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:20%;" alt='-'/>
-                    <label style="color: graytext; font-size:10px" id='whatsappNudeSection' class="my-label-s">Nude</label>
-                </div>
+                <form id="whatsappSectionFormId">
+                    <div data-role="collapsible-set"  class='my-collapsible'>
+                        <div style="float: left"><image id='whatsappIconId' src='./images/whatsappIcon.png' alt='-' style="max-width:50%;"/></div>
+                        <div><label style="color: #32B92A" id='whatsappSectionLabelId' class="my-label-m">Whatsapp</label></div>
+                        <!------ count ------>
+                        <div style="float: left;"><label class ="my-label-s" id='whatsappSectionLabelCountId'>-</label></div>
+                        <div><label class ="my-label-s"  id='whatsappSectionLabelLatestListId' >-</label></div>
+                        <!------ increase ------>
+                        <div style="float: left"><image id='whatsappIncreaseId' src='./images/whatsappIncrease.png' style="max-width:40%;" alt='-'/></div>
+                        <div><label id='whatsappIncreaseLabelSection' class="my-label-s">Increase</label></div>
+                        <div><label class ="my-label-m"  id='whatsappSectionLabelLatestListId' >[Contacts placeholder]</label></div>
+                        <!------ nude ------>
+                        <div style="float: left"><image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/></div>
+                        <div><label id='whatsappNudeSection' class="my-label-s"><b>Nude Alert</b></label></div>
+                        <div><label id='whatsappNudeCountId' class="my-label-s">-</label></div>
+                        <br/>
+                    </div>
+                </form>
                 <div data-role="collapsible-set"  class='my-collapsible'>
                     <image id='photoIconId' src='./images/photoIcon.png' style="max-width:50%;" alt='-'/>
                     <label style="color: #FF4333" id='photoSection'>Photo</label>

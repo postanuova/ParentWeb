@@ -18,17 +18,20 @@ and open the template in the editor.
 }
 
 .my-ui-content {
-    background: blueviolet;
+    background: blueviolet !important;
 }
 
 .my-label-s {
-    font-size: 10px;
+    font-size: 10px !important;
+    color: grey;
 }
 
 .my-label-m {
-    font-size: 20px;
+    font-size: 20px !important;
+    color: grey;
 }
 
 .my-label-l {
-    font-size: 30px;
+    font-size: 30px !important;
+    color: grey;
 }
