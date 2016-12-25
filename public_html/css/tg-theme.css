@@ -16,6 +16,9 @@
 html {
 	font-size: 100%;
 }
+
+
+
 body,
 input,
 select,
@@ -744,4 +747,18 @@ button[disabled],
 	outline-width: 1px;
 	outline-style: auto;
 }
-			
+	
+
+/*data-mini='true'  style="background: white"*/
+
+#custom-collapsible {
+    width: 74% !important; 
+    margin-left: 9px !important; 
+    border-width: 0px !important; 
+    background-color: white  !important;
+}
+
+#custom-collapsible h3 a {
+    border-width: 0px !important; 
+    background: white  !important;
+}
