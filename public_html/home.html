@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="./js/libs/jquery-mobile/jquery.mobile.css" />
         <script src="./js/libs/jquery/jquery-2.2.4.js"></script>
         <script src="./js/libs/jquery-mobile/jquery.mobile.js"></script>
+        <script src="./js/libs/jsrender/jsrender.min.js"></script>
+        <script src="./js/libs/sly/sly.min.js"></script>
         <script src="./js/libs/multilanguage/lang.js"></script>
 
         <link rel="stylesheet" href="./css/tg-theme.css"/>
@@ -35,6 +37,19 @@
             $(document).ready(function () {
 
             });
+        </script>
+
+        <script id="contactTmpl" type="text/x-jsrender">
+            {{if first_name}}
+            <li>
+                <em>Name:</em> {{:first_name}}
+            </li>
+            {{/if}}
+                    {{if is_group}}
+            <li>
+                <em>Group:</em> {{:title}}
+            </li>
+            {{/if}}
         </script>
 
         <script language="javascript">
@@ -96,8 +111,20 @@
 
 
 
+            function getContactList(jsonHome) {
+                var contactAR = jsonHome.data.whatsapp.latests.list;
+                var template = $.templates("#contactTmpl");
+
+                var htmlOutput = template.render(contactAR);
+                htmlOutput = "<ul class='clearfix'>" +
+                        htmlOutput +
+                        "</ul>";
+                alert("htmlOutput " + htmlOutput);
+                return htmlOutput;
+            }
+
             function roundPlus(value) {
-                return (Math.floor(value / 10)) * 10 + "+";
+                return "<b>" + (Math.floor(value / 10)) * 10 + "+</b>";
             }
 
             function buildWhatsappLatestList(jsonHome) {
@@ -110,16 +137,18 @@
                         firstNameSTR += ", ";
                     } else {
                         var otherCount = jsonHome.data.whatsapp.latests.count - maxCount;
-                        firstNameSTR += " and other " + otherCount;
+                        firstNameSTR += "<em> and other " + otherCount + "</em>";
                     }
                 }
                 return firstNameSTR;
             }
-            
+
             function buildWhatsappNudeCount(jsonHome) {
                 var nudeCount = jsonHome.data.whatsapp.nude.count;
-                if(nudeCount == 0) return "No nudes detected";
-                if(nudeCount > 0) return nudeCount + " nudes detected";
+                if (nudeCount == 0)
+                    return "No nudes detected";
+                if (nudeCount > 0)
+                    return nudeCount + " nudes detected";
             }
 
             function populateHome(jsonHome) {
@@ -128,6 +157,27 @@
                 $("#whatsappSectionLabelCountId").html(roundPlus(jsonHome.data.whatsapp.count));
                 $("#whatsappNudeSectionLabelCountId").html(jsonHome.data.whatsapp.nude.count);
                 $("#whatsappSectionLabelLatestListId").html(latestListSTR);
+                var contactListHTML = getContactList(jsonHome);
+                $("#whatsappSectionContactListId").html(contactListHTML);
+                var contactDiv = $("#whatsappSectionContactListId");
+                var $frame = $('#basic');
+                var $slidee = $frame.children('ul').eq(0);
+                var $wrap = $frame.parent();
+                'use strict';
+                $frame.sly({
+                    horizontal: 1,
+                    itemNav: 'basic',
+                    smart: 0,
+                    scrollBy: 1,
+                    mouseDragging: 1,
+                    swingSpeed: 0.2,
+                    scrollBar: $wrap.find('.hsscrollbar'),
+                    dragHandle: 1,
+                    clickBar: 1,
+                    elasticBounds: 1,
+                    speed: 600,
+                    startAt: 0,
+                });
                 $("#whatsappNudeCountId").html(nudeSTR);
             }
         </script>
@@ -156,9 +206,114 @@
                         <div style="float: left;"><label class ="my-label-s" id='whatsappSectionLabelCountId'>-</label></div>
                         <div><label class ="my-label-s"  id='whatsappSectionLabelLatestListId' >-</label></div>
                         <!------ increase ------>
-                        <div style="float: left"><image id='whatsappIncreaseId' src='./images/whatsappIncrease.png' style="max-width:40%;" alt='-'/></div>
-                        <div><label id='whatsappIncreaseLabelSection' class="my-label-s">Increase</label></div>
-                        <div><label class ="my-label-m"  id='whatsappSectionLabelLatestListId' >[Contacts placeholder]</label></div>
+                        <div style="float: left"><image id='whatsappIncreaseId' src='./images/whatsappIncrease.png' style="max-width:50%;" alt='-'/></div>
+                        <div><label id='whatsappIncreaseLabelSection' class="my-label-s"><b>Increase</b></label></div>
+
+                        <!------ contacts ------>
+                        <div class='hsframe' id='whatsappSectionContactListId'>-
+                        </div>
+                        <!-- example ------------>
+                        <div class="hsframe" id="basic">
+                            <ul class="clearfix">
+                                <li>
+                <em>Name:</em> Giada
+            </li>
+            
+                    
+        
+            
+            <li>
+                <em>Name:</em> Claudia
+            </li>
+            
+                    
+        
+            
+            <li>
+                <em>Name:</em> Beatrice
+            </li>
+            
+                    
+        
+            
+            <li>
+                <em>Name:</em> Valeria
+            </li>
+            
+                    
+        
+            
+                    
+            <li>
+                <em>Group:</em> Home
+            </li>
+            <li>
+                <em>Name:</em> Giada
+            </li>
+            
+                    
+        
+            
+            <li>
+                <em>Name:</em> Claudia
+            </li>
+            
+                    
+        
+            
+            <li>
+                <em>Name:</em> Beatrice
+            </li>
+            
+                    
+        
+            
+            <li>
+                <em>Name:</em> Valeria
+            </li>
+            
+                    
+        
+            
+                    
+            <li>
+                <em>Group:</em> Home
+            </li>
+            <li>
+                <em>Name:</em> Giada
+            </li>
+            
+                    
+        
+            
+            <li>
+                <em>Name:</em> Claudia
+            </li>
+            
+                    
+        
+            
+            <li>
+                <em>Name:</em> Beatrice
+            </li>
+            
+                    
+        
+            
+            <li>
+                <em>Name:</em> Valeria
+            </li>
+            
+                    
+        
+            
+                    
+            <li>
+                <em>Group:</em> Home
+            </li>
+                            </ul>
+                        </div>
+
                         <!------ nude ------>
                         <div style="float: left"><image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/></div>
                         <div><label id='whatsappNudeSection' class="my-label-s"><b>Nude Alert</b></label></div>
