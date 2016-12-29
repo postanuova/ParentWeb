@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>ParentWeb</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!----------------------------------------- CDN JQUERY------------------------------------------------->
@@ -15,14 +15,17 @@
         <!----------------------------------------- LOCAL JQUERY ---------------------------------------------->
 
         <link rel="stylesheet" href="./js/libs/jquery-mobile/jquery.mobile.css" />
+        <link rel="stylesheet" href="./css/tg-theme.css"/>
+        <link rel="stylesheet" href="./css/my.css"/>
+        <link rel="stylesheet" href="./css/nativedroid2/nativedroid2.color.cyan.css"/>
+        <link rel="stylesheet" href="./css/nativedroid2/flexboxgrid.min.css"/>
         <script src="./js/libs/jquery/jquery-2.2.4.js"></script>
         <script src="./js/libs/jquery-mobile/jquery.mobile.js"></script>
         <script src="./js/libs/jsrender/jsrender.min.js"></script>
         <script src="./js/libs/sly/sly.min.js"></script>
         <script src="./js/libs/multilanguage/lang.js"></script>
 
-        <link rel="stylesheet" href="./css/tg-theme.css"/>
-        <link rel="stylesheet" href="./css/my.css"/>
+        
         <script src="./js/libs/myUtils.js"></script>
 
         <script language="javascript">
@@ -42,12 +45,12 @@
         <script id="contactTmpl" type="text/x-jsrender">
             {{if first_name}}
             <li>
-                <em>Name:</em> {{:first_name}}
+            <em>Name:</em> {{:first_name}}
             </li>
             {{/if}}
-                    {{if is_group}}
+            {{if is_group}}
             <li>
-                <em>Group:</em> {{:title}}
+            <em>Group:</em> {{:title}}
             </li>
             {{/if}}
         </script>
@@ -158,7 +161,7 @@
                 $("#whatsappNudeSectionLabelCountId").html(jsonHome.data.whatsapp.nude.count);
                 $("#whatsappSectionLabelLatestListId").html(latestListSTR);
                 var contactListHTML = getContactList(jsonHome);
-                $("#whatsappSectionContactListId").html(contactListHTML);
+                //$("#whatsappSectionContactListId").html(contactListHTML);
                 var contactDiv = $("#whatsappSectionContactListId");
                 var $frame = $('#basic');
                 var $slidee = $frame.children('ul').eq(0);
@@ -199,127 +202,46 @@
 
             <div role="main"  class="ui-content">
                 <form id="whatsappSectionFormId">
-                    <div data-role="collapsible-set"  class='my-collapsible'>
-                        <div style="float: left"><image id='whatsappIconId' src='./images/whatsappIcon.png' alt='-' style="max-width:50%;"/></div>
-                        <div><label style="color: #32B92A" id='whatsappSectionLabelId' class="my-label-m">Whatsapp</label></div>
-                        <!------ count ------>
-                        <div style="float: left;"><label class ="my-label-s" id='whatsappSectionLabelCountId'>-</label></div>
-                        <div><label class ="my-label-s"  id='whatsappSectionLabelLatestListId' >-</label></div>
-                        <!------ increase ------>
-                        <div style="float: left"><image id='whatsappIncreaseId' src='./images/whatsappIncrease.png' style="max-width:50%;" alt='-'/></div>
-                        <div><label id='whatsappIncreaseLabelSection' class="my-label-s"><b>Increase</b></label></div>
+                    <!--div data-role="collapsible-set"  class='my-collapsible'-->
+                    <div style="float: left"><image id='whatsappIconId' src='./images/whatsappIcon.png' alt='-' style="max-width:50%;"/></div>
+                    <div><label style="color: #32B92A" id='whatsappSectionLabelId' class="my-label-m">Whatsapp</label></div>
+                    <!------ count ------>
+                    <div style="float: left;"><label class ="my-label-s" id='whatsappSectionLabelCountId'>-</label></div>
+                    <div><label class ="my-label-s"  id='whatsappSectionLabelLatestListId' >-</label></div>
+                    <!------ increase ------>
+                    <div style="float: left"><image id='whatsappIncreaseId' src='./images/whatsappIncrease.png' style="max-width:50%;" alt='-'/></div>
+                    <div><label id='whatsappIncreaseLabelSection' class="my-label-s"><b>Increase</b></label></div>
 
-                        <!------ contacts ------>
-                        <div class='hsframe' id='whatsappSectionContactListId'>-
-                        </div>
-                        <!-- example ------------>
-                        <div class="hsframe" id="basic">
-                            <ul class="clearfix">
-                                <li>
-                <em>Name:</em> Giada
-            </li>
-            
-                    
-        
-            
-            <li>
-                <em>Name:</em> Claudia
-            </li>
-            
-                    
-        
-            
-            <li>
-                <em>Name:</em> Beatrice
-            </li>
-            
-                    
-        
-            
-            <li>
-                <em>Name:</em> Valeria
-            </li>
-            
-                    
-        
-            
-                    
-            <li>
-                <em>Group:</em> Home
-            </li>
-            <li>
-                <em>Name:</em> Giada
-            </li>
-            
-                    
-        
-            
-            <li>
-                <em>Name:</em> Claudia
-            </li>
-            
-                    
-        
-            
-            <li>
-                <em>Name:</em> Beatrice
-            </li>
-            
-                    
-        
-            
-            <li>
-                <em>Name:</em> Valeria
-            </li>
-            
-                    
-        
-            
-                    
-            <li>
-                <em>Group:</em> Home
-            </li>
-            <li>
-                <em>Name:</em> Giada
-            </li>
-            
-                    
-        
-            
-            <li>
-                <em>Name:</em> Claudia
-            </li>
-            
-                    
-        
-            
-            <li>
-                <em>Name:</em> Beatrice
-            </li>
-            
-                    
-        
-            
-            <li>
-                <em>Name:</em> Valeria
-            </li>
-            
-                    
-        
-            
-                    
-            <li>
-                <em>Group:</em> Home
-            </li>
-                            </ul>
-                        </div>
-
-                        <!------ nude ------>
-                        <div style="float: left"><image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/></div>
-                        <div><label id='whatsappNudeSection' class="my-label-s"><b>Nude Alert</b></label></div>
-                        <div><label id='whatsappNudeCountId' class="my-label-s">-</label></div>
-                        <br/>
+                    <!------ contacts ------>
+                    <div class='hsframe' id='whatsappSectionContactListId'>-
                     </div>
+                    <!-- example ------------>
+                    <div class="hsframe" id="basic">
+                        <ul class="clearfix">
+                            <li>
+                                <em>Name:</em> Giada
+                            </li>
+                            <li>
+                                <em>Name:</em> Claudia
+                            </li>
+                            <li>
+                                <em>Name:</em> Beatrice
+                            </li>
+                            <li>
+                                <em>Name:</em> Valeria
+                            </li>    
+                            <li>
+                                <em>Group:</em> Home
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!------ nude ------>
+                    <div style="float: left"><image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/></div>
+                    <div><label id='whatsappNudeSection' class="my-label-s"><b>Nude Alert</b></label></div>
+                    <div><label id='whatsappNudeCountId' class="my-label-s">-</label></div>
+                    <br/>
+                    <!--/div-->
                 </form>
                 <div data-role="collapsible-set"  class='my-collapsible'>
                     <image id='photoIconId' src='./images/photoIcon.png' style="max-width:50%;" alt='-'/>
