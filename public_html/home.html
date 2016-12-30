@@ -18,14 +18,14 @@
         <link rel="stylesheet" href="./css/tg-theme.css"/>
         <link rel="stylesheet" href="./css/my.css"/>
         <link rel="stylesheet" href="./css/nativedroid2/nativedroid2.color.cyan.css"/>
-        <link rel="stylesheet" href="./css/nativedroid2/flexboxgrid.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.2.4/gridlex.min.css">
         <script src="./js/libs/jquery/jquery-2.2.4.js"></script>
         <script src="./js/libs/jquery-mobile/jquery.mobile.js"></script>
         <script src="./js/libs/jsrender/jsrender.min.js"></script>
         <script src="./js/libs/sly/sly.min.js"></script>
         <script src="./js/libs/multilanguage/lang.js"></script>
 
-        
+
         <script src="./js/libs/myUtils.js"></script>
 
         <script language="javascript">
@@ -122,7 +122,7 @@
                 htmlOutput = "<ul class='clearfix'>" +
                         htmlOutput +
                         "</ul>";
-                alert("htmlOutput " + htmlOutput);
+                //alert("htmlOutput " + htmlOutput);
                 return htmlOutput;
             }
 
@@ -173,6 +173,7 @@
                     smart: 0,
                     scrollBy: 1,
                     mouseDragging: 1,
+                    touchDragging: 1,
                     swingSpeed: 0.2,
                     scrollBar: $wrap.find('.hsscrollbar'),
                     dragHandle: 1,
@@ -191,7 +192,7 @@
         <div id="homePage" data-role="page">
 
             <div id="header" data-role="header" data-theme="a" data-position="fixed">
-                <div id="headerNavbarId" data-role="navbar">
+                <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
                     <ul>
                         <li><a href="javascript:doGetHomeInfoLocal('day')" data-iconshadow="false" class="ui-btn-active" >Day</a></li>
                         <li><a href="javascript:doGetHomeInfoLocal('week')" data-iconshadow="false">Week</a></li>
@@ -201,61 +202,80 @@
             </div>
 
             <div role="main"  class="ui-content">
-                <form id="whatsappSectionFormId">
-                    <!--div data-role="collapsible-set"  class='my-collapsible'-->
-                    <div style="float: left"><image id='whatsappIconId' src='./images/whatsappIcon.png' alt='-' style="max-width:50%;"/></div>
-                    <div><label style="color: #32B92A" id='whatsappSectionLabelId' class="my-label-m">Whatsapp</label></div>
+                <!-- WHATSAPP-->
+                <div data-role="collapsible-set"  class='my-collapsible'>
+                    <div class="grid">
+                        <div class="col-3"><image id='whatsappIconId' src='./images/whatsappIcon.png' alt='-' style="max-width:50%;"/></div>
+                        <div class="col-2"><label style="color: #32B92A" id='whatsappSectionLabelId' class="my-label-m">Whatsapp</label></div> 
+
+                    </div>
+
                     <!------ count ------>
-                    <div style="float: left;"><label class ="my-label-s" id='whatsappSectionLabelCountId'>-</label></div>
-                    <div><label class ="my-label-s"  id='whatsappSectionLabelLatestListId' >-</label></div>
+                    <div class="grid">
+                        <div class="col-2"><label class ="my-label-s" id='whatsappSectionLabelCountId'>-</label></div>
+                        <div class="col-10"><label class ="my-label-s"  id='whatsappSectionLabelLatestListId' >-</label></div> 
+                    </div>
                     <!------ increase ------>
-                    <div style="float: left"><image id='whatsappIncreaseId' src='./images/whatsappIncrease.png' style="max-width:50%;" alt='-'/></div>
-                    <div><label id='whatsappIncreaseLabelSection' class="my-label-s"><b>Increase</b></label></div>
+                    <div class="grid">
+                        <div class="col-2"><image id='whatsappIncreaseId' src='./images/whatsappIncrease.png' style="max-width:50%;" alt='-'/></div>
+                        <div class="col-1"><label id='whatsappIncreaseLabelSection' class="my-label-s"><b>Increase</b></label></div> 
+                    </div>
 
                     <!------ contacts ------>
-                    <div class='hsframe' id='whatsappSectionContactListId'>-
+                    <div class="grid">
+                        <div class="col-12">
+                            <div class="hsframe" id="basic">  <!--id='whatsappSectionContactListId'-->
+                                <ul class="slidee">
+                                    <li style="width: 100px">
+                                        <image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/>
+                                        Giada
+                                    </li>
+                                   <li style="width: 100px">
+                                        Claudia
+                                    </li>
+                                   <li style="width: 100px">
+                                        Beatrice
+                                    </li>
+                                   <li style="width: 100px">
+                                        Valeria
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <!-- example ------------>
-                    <div class="hsframe" id="basic">
-                        <ul class="clearfix">
-                            <li>
-                                <em>Name:</em> Giada
-                            </li>
-                            <li>
-                                <em>Name:</em> Claudia
-                            </li>
-                            <li>
-                                <em>Name:</em> Beatrice
-                            </li>
-                            <li>
-                                <em>Name:</em> Valeria
-                            </li>    
-                            <li>
-                                <em>Group:</em> Home
-                            </li>
-                        </ul>
-                    </div>
-
                     <!------ nude ------>
-                    <div style="float: left"><image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/></div>
-                    <div><label id='whatsappNudeSection' class="my-label-s"><b>Nude Alert</b></label></div>
-                    <div><label id='whatsappNudeCountId' class="my-label-s">-</label></div>
-                    <br/>
-                    <!--/div-->
-                </form>
-                <div data-role="collapsible-set"  class='my-collapsible'>
-                    <image id='photoIconId' src='./images/photoIcon.png' style="max-width:50%;" alt='-'/>
-                    <label style="color: #FF4333" id='photoSection'>Photo</label>
-                    <image id='photoNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/>
-                    <label style="color: graytext" id='photoNudeSection'>Nude</label>
+                    <div class="grid">
+                        <div class="col-2"><image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:10%;" alt='-'/></div>
+                        <div class="col-10"><label id='whatsappNudeSection' class="my-label-s"><b>Nude Alert</b></label></div>
+                        <div class="col-5"><label id='whatsappNudeCountId' class="my-label-s">-</label></div>
+                    </div>
                 </div>
+                <!--/div-->
+                <!-- PHOTO-->
                 <div data-role="collapsible-set"  class='my-collapsible'>
-                    <image id='visitIconId' src='./images/visitIcon.png' style="max-width:50%;" alt='-'/>
-                    <label style="color: #00A1AC" id='visitSection'>Visit</label>
+                    <div class="grid">
+                        <div class="col-3"><image id='photoIconId' src='./images/photoIcon.png' style="max-width:50%;" alt='-'/></div>
+                        <div class="col-2"><label style="color: #FF4333" id='photoSection'>Photo</label></div>
+                    </div>  
+
+                    <div class="grid">
+                        <div class="col-2"><image id='photoNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/></div>
+                        <div class="col-10"><label style="color: graytext" id='photoNudeSection'>Nude</label></div>
+                        <div class="col-5"><label id='photoNudeCountId' class="my-label-s">-</label></div>
+                    </div>
                 </div>
+                <!-- VISIT-->
                 <div data-role="collapsible-set"  class='my-collapsible'>
-                    <image id='geofenceIconId' src='./images/geofenceIcon.png' alt='-' style="max-width:50%;"/>
-                    <label style="color: #FFA602" id='geofenceSection'>Geofence</label>
+                    <div class="grid">
+                        <div class="col-3"><image id='visitIconId' src='./images/visitIcon.png' style="max-width:50%;" alt='-'/></div>
+                        <div class="col-2"><label style="color: #00A1AC" id='visitSection'>Visit</label></div>
+                    </div>
+                </div>
+                <!-- GEOFENCES-->
+                <div data-role="collapsible-set"  class='my-collapsible'>
+                    <div class="grid">
+                        <div class="col-3"><image id='geofenceIconId' src='./images/geofenceIcon.png' alt='-' style="max-width:50%;"/></div>
+                        <div class="col-2"><label style="color: #FFA602" id='geofenceSection'>Geofence</label></div> 
+                    </div>
                 </div>
             </div><!-- /content -->
 
