@@ -49,7 +49,7 @@
                             <image src='./images/circleLightGreenIcon.png' style="max-width:50%;" alt='-'/>
                         </div>
                         <div class="col-11">
-                            <label class="my-label-s">{{:first_name}}</label>
+                            <label class="my-label-m">{{:first_name}}</label>
                         </div>
                     </div>
                 </li>
@@ -61,7 +61,7 @@
                             <image src='./images/circleLightOrangeIcon.png' style="max-width:50%;" alt='-'/>
                         </div>
                         <div class="col-11">
-                            <label class="my-label-s">{{:title}}</label>
+                            <label class="my-label-m">{{:title}}</label>
                         </div>
                     </div>
                 </li>
@@ -128,7 +128,7 @@
 
 
             function getContactList(jsonHome) {
-                var contactAR = jsonHome.data.whatsapp.latests.list;
+                var contactAR = jsonHome.data.whatsapp.increase.list;
                 var template = $.templates("#contactTmpl");
 
                 var htmlOutput = template.render(contactAR);
@@ -177,11 +177,11 @@
                 window.alert(contactListHTML);
                 $("#whatsappContactListDiv").html(contactListHTML);
                 var contactDiv = $("#whatsappContactListDiv");
-                var $frame = $('#whatsappContactListDiv');
-                var $slidee = $frame.children('ul').eq(0);
-                var $wrap = $frame.parent();
+                //var contactDiv = $('#whatsappContactListDiv');
+                //var $slidee = $frame.children('ul').eq(0);
+                //var $wrap = $frame.parent();
                 'use strict';
-                $frame.sly({
+                contactDiv.sly({
                     horizontal: 1,
                     itemNav: 'basic',
                     smart: 0,
@@ -189,7 +189,7 @@
                     mouseDragging: 1,
                     touchDragging: 1,
                     swingSpeed: 0.2,
-                    scrollBar: $wrap.find('.hsscrollbar'),
+                    //scrollBar: $wrap.find('.hsscrollbar'),
                     dragHandle: 1,
                     clickBar: 1,
                     elasticBounds: 1,
