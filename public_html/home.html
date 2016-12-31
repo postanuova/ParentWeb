@@ -18,7 +18,8 @@
         <link rel="stylesheet" href="./css/tg-theme.css"/>
         <link rel="stylesheet" href="./css/my.css"/>
         <link rel="stylesheet" href="./css/nativedroid2/nativedroid2.color.cyan.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.2.4/gridlex.min.css">
+        <link rel="stylesheet" href="./css/gridlex/gridlex.css"/>
+        
         <script src="./js/libs/jquery/jquery-2.2.4.js"></script>
         <script src="./js/libs/jquery-mobile/jquery.mobile.js"></script>
         <script src="./js/libs/jsrender/jsrender.min.js"></script>
@@ -44,14 +45,28 @@
 
         <script id="contactTmpl" type="text/x-jsrender">
             {{if first_name}}
-            <li>
-            <em>Name:</em> {{:first_name}}
-            </li>
+                <li style="width: 100px;">
+                    <div class="grid">
+                        <div class="col-11">
+                            <image src='./images/circleLightGreenIcon.png' style="max-width:50%;" alt='-'/>
+                        </div>
+                        <div class="col-11">
+                            {{:first_name}}
+                        </div>
+                    </div>
+                </li>
             {{/if}}
             {{if is_group}}
-            <li>
-            <em>Group:</em> {{:title}}
-            </li>
+                <li style="width: 100px;">
+                    <div class="grid">
+                        <div class="col-11">
+                            <image src='./images/circleLightGreenIcon.png' style="max-width:50%;" alt='-'/>
+                        </div>
+                        <div class="col-11">
+                            {{:title}}
+                        </div>
+                    </div>
+                </li>
             {{/if}}
         </script>
 
@@ -119,7 +134,7 @@
                 var template = $.templates("#contactTmpl");
 
                 var htmlOutput = template.render(contactAR);
-                htmlOutput = "<ul class='clearfix'>" +
+                htmlOutput = "<ul class='slidee'>" +
                         htmlOutput +
                         "</ul>";
                 //alert("htmlOutput " + htmlOutput);
@@ -161,9 +176,10 @@
                 $("#whatsappNudeSectionLabelCountId").html(jsonHome.data.whatsapp.nude.count);
                 $("#whatsappSectionLabelLatestListId").html(latestListSTR);
                 var contactListHTML = getContactList(jsonHome);
-                //$("#whatsappSectionContactListId").html(contactListHTML);
-                var contactDiv = $("#whatsappSectionContactListId");
-                var $frame = $('#basic');
+                window.alert(contactListHTML);
+                $("#whatsappContactListDiv").html(contactListHTML);
+                var contactDiv = $("#whatsappContactListDiv");
+                var $frame = $('#whatsappContactListDiv');
                 var $slidee = $frame.children('ul').eq(0);
                 var $wrap = $frame.parent();
                 'use strict';
@@ -180,7 +196,7 @@
                     clickBar: 1,
                     elasticBounds: 1,
                     speed: 600,
-                    startAt: 0,
+                    startAt: 0
                 });
                 $("#whatsappNudeCountId").html(nudeSTR);
             }
@@ -206,14 +222,14 @@
                 <div data-role="collapsible-set"  class='my-collapsible'>
                     <div class="grid">
                         <div class="col-3"><image id='whatsappIconId' src='./images/whatsappIcon.png' alt='-' style="max-width:50%;"/></div>
-                        <div class="col-2"><label style="color: #32B92A" id='whatsappSectionLabelId' class="my-label-m">Whatsapp</label></div> 
+                        <div class="col-2"><label style="color: #32B92A" id='whatsappSectionLabelId' class="my-label-l">Whatsapp</label></div> 
 
                     </div>
 
                     <!------ count ------>
                     <div class="grid">
                         <div class="col-2"><label class ="my-label-s" id='whatsappSectionLabelCountId'>-</label></div>
-                        <div class="col-10"><label class ="my-label-s"  id='whatsappSectionLabelLatestListId' >-</label></div> 
+                        <div class="col-9"><label class ="my-label-s"  id='whatsappSectionLabelLatestListId' >-</label></div> 
                     </div>
                     <!------ increase ------>
                     <div class="grid">
@@ -223,20 +239,26 @@
 
                     <!------ contacts ------>
                     <div class="grid">
-                        <div class="col-12">
-                            <div class="hsframe" id="basic">  <!--id='whatsappSectionContactListId'-->
+                        <div class="col-11">
+                            <div class="hsframe" id="whatsappContactListDiv">  <!--id='whatsappSectionContactListId'-->
                                 <ul class="slidee">
-                                    <li style="width: 100px">
-                                        <image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/>
-                                        Giada
+                                    <li style="width: 100px;">
+                                        <div class="grid">
+                                            <div class="col-11">
+                                                <image src='./images/circleLightGreenIcon.png' style="max-width:50%;" alt='-'/>
+                                            </div>
+                                            <div class="col-11">
+                                                Giada
+                                            </div>
+                                        </div>
                                     </li>
-                                   <li style="width: 100px">
-                                        Claudia
+                                    <li style="width: 50px">
+                                        <image src='./images/whatsappIncrease.png' style="max-width:100%;" alt='-'/>
                                     </li>
-                                   <li style="width: 100px">
+                                    <li style="width: 50px">
                                         Beatrice
                                     </li>
-                                   <li style="width: 100px">
+                                    <li style="width: 50px">
                                         Valeria
                                 </ul>
                             </div>
