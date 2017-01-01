@@ -43,11 +43,13 @@
                 //  window.alert("document ready completed");
             });
 
+            /**
+             * builds horizontal contacts slider
+             */
             function startSly() {
                 var contactDiv = $("#whatsappContactListDiv");
                 contactDiv.sly('destroy');
                 //'use strict';
-
                 var sly = new Sly(contactDiv, {
                     horizontal: 1,
                     itemNav: 'basic',
@@ -63,9 +65,23 @@
                     speed: 600,
                     startAt: 0
                 });
-        sly.init();
-        }
-            
+                sly.init();
+            }
+            /**
+             * 
+             * @param {type} jsonHome
+             * @returns {String} list of increase contacts
+             */
+            function buildWhatsappIncreaseContactList4Sly(jsonHome) {
+                var contactAR = jsonHome.data.whatsapp.increase.list;
+                var template = $.templates("#contactTmpl");
+                var htmlOutput = template.render(contactAR);
+                htmlOutput = "<ul class='slidee'>" +
+                        htmlOutput +
+                        "</ul>";
+                //alert("htmlOutput " + htmlOutput);
+      return htmlOutput;
+                }
         </script>
 
         <script id="contactTmpl" type="text/x-jsrender">
@@ -95,7 +111,64 @@
             {{/if}}
         </script>
 
+        
+
         <script language="javascript">
+                /**
+                 * 
+                 * @param {type} value
+                 * @returns {String} round 187 to nearest number wich ends with 0
+                 */
+                function roundPlus(value) {
+                    return "<b>" + (Math.floor(value / 10)) * 10 + "+</b>";
+                }
+
+                function buildWhatsappLatestList(jsonHome) {
+                    var latestAR = jsonHome.data.whatsapp.latests.list;
+                    var maxCount = Math.min(latestAR.length, 3);
+                    var firstNameSTR = "&nbsp;&nbsp;&nbsp;";
+                    for (i = 0; i < maxCount; i++) {
+                        firstNameSTR += latestAR[i].first_name;
+                        if (i < maxCount - 1) {
+                            firstNameSTR += ", ";
+                        } else {
+                            var otherCount = jsonHome.data.whatsapp.latests.count - maxCount;
+                            firstNameSTR += "<em> and other " + otherCount + "</em>";
+                        }
+                    }
+                    return firstNameSTR;
+                }
+
+                function buildWhatsappNudeCount(jsonHome) {
+                    var nudeCount = jsonHome.data.whatsapp.nude.count;
+                    if (nudeCount == 0)
+                        return "No nudes detected";
+                    if (nudeCount > 0)
+                        return nudeCount + " nudes detected";
+                }
+
+                function buildWhatsappHasMediaIconGroup(jsonHome) {
+                    var hasText = jsonHome.data.whatsapp.latests.has_text;
+                    var hasImage = jsonHome.data.whatsapp.latests.has_image;
+                    var hasVideo = jsonHome.data.whatsapp.latests.has_video;
+                    var hasAudio = jsonHome.data.whatsapp.latests.has_audio;
+                    return buildMediaIconGroup(hasText, hasImage, hasVideo, hasAudio);
+                }
+
+                function buildMediaIconGroup(hasText, hasImage, hasVideo, hasAudio) {
+                    var htmlOutput = "";
+                    if (hasText)
+                        htmlOutput += "<image src='./images/whatsappHasMessage.png' style='max-width:10%;' alt='-'/>";
+                    if (hasImage)
+                        htmlOutput += "&nbsp;<image src='./images/whatsappHasPicture.png' style='max-width:10%;' alt='-'/>";
+                    if (hasVideo)
+                        htmlOutput += "&nbsp;<image src='./images/photoHasVideo.png' style='max-width:10%;' alt='-'/>";
+                    if (hasAudio)
+                        htmlOutput += "&nbsp;<image src='./images/whatsappHasVocalMessage.png' style='max-width:10%;' alt='-'/>";
+                    return htmlOutput;
+                }
+        </script>
+<script language="javascript">
                 function ciao() {
                     //window.alert("callback ciao");
                 }
@@ -150,65 +223,20 @@
                         populateHome(jsonHomeMonth);
                 }
 
-
-
-                function getContactList(jsonHome) {
-                    var contactAR = jsonHome.data.whatsapp.increase.list;
-                    var template = $.templates("#contactTmpl");
-                    var htmlOutput = template.render(contactAR);
-                    htmlOutput = "<ul class='slidee'>" +
-                            htmlOutput +
-                            "</ul>";
-                    //alert("htmlOutput " + htmlOutput);
-                    return htmlOutput;
-                }
-
-                function roundPlus(value) {
-                    return "<b>" + (Math.floor(value / 10)) * 10 + "+</b>";
-                }
-
-                function buildWhatsappLatestList(jsonHome) {
-                    var latestAR = jsonHome.data.whatsapp.latests.list;
-                    var maxCount = Math.min(latestAR.length, 3);
-                    var firstNameSTR = "&nbsp;&nbsp;&nbsp;";
-                    for (i = 0; i < maxCount; i++) {
-                        firstNameSTR += latestAR[i].first_name;
-                        if (i < maxCount - 1) {
-                            firstNameSTR += ", ";
-                        } else {
-                            var otherCount = jsonHome.data.whatsapp.latests.count - maxCount;
-                            firstNameSTR += "<em> and other " + otherCount + "</em>";
-                        }
-                    }
-                    return firstNameSTR;
-                }
-
-                function buildWhatsappNudeCount(jsonHome) {
-                    var nudeCount = jsonHome.data.whatsapp.nude.count;
-                    if (nudeCount == 0)
-                        return "No nudes detected";
-                    if (nudeCount > 0)
-                        return nudeCount + " nudes detected";
-                }
-
                 function populateHome(jsonHome) {
                     var latestListSTR = buildWhatsappLatestList(jsonHome);
                     var nudeSTR = buildWhatsappNudeCount(jsonHome);
                     $("#whatsappSectionLabelCountId").html(roundPlus(jsonHome.data.whatsapp.count));
+                    $("#hasMediaDiv").html(buildWhatsappHasMediaIconGroup(jsonHome));
                     $("#whatsappNudeSectionLabelCountId").html(jsonHome.data.whatsapp.nude.count);
                     $("#whatsappSectionLabelLatestListId").html(latestListSTR);
-                    var contactListHTML = getContactList(jsonHome);
-                    //window.alert(contactListHTML);
+                    var contactListHTML = buildWhatsappIncreaseContactList4Sly(jsonHome);
                     $("#whatsappContactListDiv").html(contactListHTML);
-                    //var contactDiv = $('#whatsappContactListDiv');
-                    //var $slidee = contactDiv.children('ul').eq(0);
                     startSly();
-                    //var $wrap = $frame.parent();
-
                     $("#whatsappNudeCountId").html(nudeSTR);
+                    
                 }
         </script>
-
     </head>
     <body>
         <!-------------------------------HOME PAGE------------------------------------------- -->
@@ -233,10 +261,15 @@
 
                     </div>
 
-                    <!------ count ------>
+                    <!--- - - - count - - - --->
                     <div class="grid">
-                        <div class="col-2"><label class ="my-label-s" id='whatsappSectionLabelCountId'>-</label></div>
-                        <div class="col-9"><label class ="my-label-s"  id='whatsappSectionLabelLatestListId' >-</label></div> 
+                        <div class="col-1"></div>
+                        <div class="col-2"><label class ="my-label-m" id='whatsappSectionLabelCountId'>-</label></div>
+                        <div id ='hasMediaDiv' class="col-8">
+                            <!-- contains media type icon -->
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-10"><label class ="my-label-m"  id='whatsappSectionLabelLatestListId' >-</label></div> 
                     </div>
                     <!------ increase ------>
                     <div class="grid">
