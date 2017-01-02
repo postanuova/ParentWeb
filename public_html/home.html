@@ -89,7 +89,7 @@
             <li style="width: 100px;">
                 <div class="grid">
                     <div class="col-11">
-                        <image src='./images/circleLightGreenIcon.png' style="max-width:50%;" alt='-'/>
+                        <image src='./images/circleLightGreenIcon.png' style="max-width:30%;" alt='-'/>
                     </div>
                     <div class="col-11">
                         <label class="my-label-m">{{:first_name}}</label>
@@ -101,7 +101,7 @@
             <li style="width: 100px;">
                 <div class="grid">
                     <div class="col-11">
-                        <image src='./images/circleLightOrangeIcon.png' style="max-width:50%;" alt='-'/>
+                        <image src='./images/circleLightOrangeIcon.png' style="max-width:30%;" alt='-'/>
                     </div>
                     <div class="col-11">
                         <label class="my-label-m">{{:title}}</label>
@@ -120,7 +120,7 @@
            * @returns {String} round 187 to nearest number wich ends with 0
            */
           function roundPlus(value) {
-              return "<b>" + (Math.floor(value / 10)) * 10 + "+</b>";
+              return "<b>" + (Math.floor(value / 10)) * 10 + " +</b>";
           }
 
           function buildWhatsappLatestList(jsonHome) {
@@ -142,7 +142,7 @@
           function buildNudeCount(nudeCount) {
               if (nudeCount == 0)
                   return "No nudes detected";
-                if (nudeCount == 1)
+              if (nudeCount == 1)
                   return nudeCount + " nude detected";
               if (nudeCount > 1)
                   return nudeCount + " nudes detected";
@@ -214,7 +214,7 @@
               for (var i = 0; i < maxPlacesNames; i++) {
                   htmlOutput += placesAR[i].name;
                   if (i < maxPlacesNames - 1)
-              htmlOutput += ",&nbsp;";
+                      htmlOutput += ",&nbsp;";
               }
               var otherNumber = count - maxPlacesNames;
               htmlOutput += "<em>&nbsp;and other " + otherNumber + "</em>";
@@ -316,16 +316,15 @@
         <!-- WHATSAPP-->
         <div data-role="collapsible-set"  class='my-collapsible'>
           <div class="grid">
-            <div class="col-2"><image id='whatsappIconImage' src='./images/whatsappIcon.png' alt='-' style="max-width:50%;"/></div>
-            <div class="col-10"><label style="color: #32B92A" id='whatsappSectionLabel' class="my-label-l">Whatsapp</label></div> 
+            <div class="col-2"><image id='whatsappIconImage' src='./images/whatsappIcon.png' alt='-' style="max-width:50%; "/></div>
+            <div class="col-10"><label style="color: #32B92A; " id='whatsappSectionLabel' class="my-label-l">Whatsapp</label></div> 
           </div>
 
           <!--- - - - whatsapp count  & mediatype - - - - - - - -->
           <div class="grid">
             <div class="col-2"></div>
-            <div class="col-1"><label class ="my-label-m" id='whatsappCountLabel'></label></div>
-            <div class="col-1"></div>
-            <div class="col-7" id ='hasMediaDiv' ></div>
+            <div class="col-2"><label class ="my-label-m" id='whatsappCountLabel' style="vertical-align: bottom;"></label></div>
+            <div class="col-7" id ='hasMediaDiv' style="vertical-align: top;"></div>
           </div>
           <!--- - - - whatsapp latest - - - - - - - -->
           <div class="grid">
@@ -357,16 +356,19 @@
         <!-- PHOTO-->
         <div data-role="collapsible-set"  class='my-collapsible'>
           <div class="grid">
-            <div class="col-3"><image id='photoIconId' src='./images/photoIcon.png' style="max-width:50%;" alt='-'/></div>
-            <div class="col-2"><label style="color: #FF4333" id='photoSection'>Photo</label></div>
+            <div class="col-2"><image id='photoIconId' src='./images/photoIcon.png' style="max-width:50%;" alt='-'/></div>
+
+            <div class="col-7"><label class="my-label-l" style="color: #FF4333" id='photoSection'>Photo</label></div>
           </div>  
 
           <!--- - - - photo count  & mediatype - - - - - - - -->
           <div class="grid">
-            <div class="col-1"></div>
-            <div class="col-2"><label class ="my-label-m" id='photoSectionLabelCountId'>[COUNT]</label></div>
-            <div class="col-8" id ='photoHasMediaDiv'><!-- photo contains media type icon --></div>
-            <div class="col-1"></div>
+            <div class="col-2"></div>
+            <div class="col-2"><label class ="my-label-m" id='photoSectionLabelCountId'>[COUNT]</label></div> 
+            <div class="col-8" id ='photoHasMediaDiv'></div>
+          </div>
+          <div class="grid">
+            <div class="col-2"></div>
             <div class="col-10"><label class ="my-label-m"  id='photoSectionPlacesLabel' >[PLACES LIST AND OTHER COUNT]</label></div> 
           </div>
 
@@ -379,18 +381,22 @@
         <!-- VISIT-->
         <div data-role="collapsible-set"  class='my-collapsible'>
           <div class="grid">
-            <div class="col-3"><image id='visitIconId' src='./images/visitIcon.png' style="max-width:50%;" alt='-'/></div>
-            <div class="col-8"><label style="color: #00A1AC" id='visitSection'>Visit</label></div>
-            <div class="col-1"></div>
+            <div class="col-2"><image id='visitIconId' src='./images/visitIcon.png' style="max-width:50%;" alt='-'/></div>
+            <div class="col-10"><label class="my-label-l" style="color: #00A1AC" id='visitSection'>Visit</label></div>
+          </div>
+          <div class="grid">
+            <div class="col-2"></div>
             <div class="col-10"><label class ="my-label-m"  id='visitSectionPlacesLabel' >VISIT PLACES LIST AND OTHER COUNT]</label></div>
           </div>
         </div>
         <!-- GEOFENCES-->
         <div data-role="collapsible-set"  class='my-collapsible'>
           <div class="grid">
-            <div class="col-3"><image id='geofenceIconId' src='./images/geofenceIcon.png' alt='-' style="max-width:50%;"/></div>
-            <div class="col-8"><label style="color: #FFA602" id='geofenceSection'>Geofence</label></div> 
-            <div class="col-1"></div>
+            <div class="col-2"><image id='geofenceIconId' src='./images/geofenceIcon.png' alt='-' style="max-width:50%;"/></div>
+            <div class="col-10"><label class="my-label-l" style="color: #FFA602" id='geofenceSection'>Geofence</label></div> 
+            </div>
+          <div class="grid">
+            <div class="col-2"></div>
             <div class="col-10"><label class ="my-label-m"  id='geofenceSectionPlacesLabel' >[GEOFENCES PLACES LIST AND OTHER COUNT]</label></div>
           </div>
         </div>
