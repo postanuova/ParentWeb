@@ -126,7 +126,7 @@
           function buildWhatsappLatestList(jsonHome) {
               var latestAR = jsonHome.data.whatsapp.latests.list;
               var maxCount = Math.min(latestAR.length, 3);
-              var firstNameSTR = "&nbsp;&nbsp;&nbsp;";
+              var firstNameSTR = "";
               for (i = 0; i < maxCount; i++) {
                   firstNameSTR += latestAR[i].first_name;
                   if (i < maxCount - 1) {
@@ -142,18 +142,20 @@
           function buildNudeCount(nudeCount) {
               if (nudeCount == 0)
                   return "No nudes detected";
-              if (nudeCount > 0)
+                if (nudeCount == 1)
+                  return nudeCount + " nude detected";
+              if (nudeCount > 1)
                   return nudeCount + " nudes detected";
           }
-          
+
           function buildWhatsappNudeCount(jsonHome) {
               var nudeCount = jsonHome.data.whatsapp.nude.count;
               return buildNudeCount(nudeCount);
-            }
-          
+          }
+
           function buildPhotoNudeCount(jsonHome) {
-            var nudeCount = jsonHome.data.photo.nude.count;
-            return buildNudeCount(nudeCount);
+              var nudeCount = jsonHome.data.photo.nude.count;
+              return buildNudeCount(nudeCount);
           }
 
           function buildWhatsappHasMediaIconGroup(jsonHome) {
@@ -190,19 +192,19 @@
           function buildPhotoPlacesListAndOtherCount(jsonHome) {
               var count = jsonHome.data.photo.places.count;
               var placesAR = jsonHome.data.photo.places.list;
-              return buildPlacesListAndOtherCount(count,placesAR);
+              return buildPlacesListAndOtherCount(count, placesAR);
           }
-          
+
           function buildVisitPlacesListAndOtherCount(jsonHome) {
               var count = jsonHome.data.visit.places.count;
               var placesAR = jsonHome.data.visit.places.list;
-              return buildPlacesListAndOtherCount(count,placesAR);
+              return buildPlacesListAndOtherCount(count, placesAR);
           }
-          
+
           function buildGeofencePlacesListAndOtherCount(jsonHome) {
               var count = jsonHome.data.geofence.count;
               var placesAR = jsonHome.data.geofence.geofences;
-              return buildPlacesListAndOtherCount(count,placesAR);
+              return buildPlacesListAndOtherCount(count, placesAR);
           }
 
           function buildPlacesListAndOtherCount(count, placesAR) {
@@ -211,9 +213,10 @@
               var maxPlacesNames = Math.min(2, placesAR.length);
               for (var i = 0; i < maxPlacesNames; i++) {
                   htmlOutput += placesAR[i].name;
-                  if (i< maxPlacesNames - 1) htmlOutput +=",&nbsp;";
+                  if (i < maxPlacesNames - 1)
+              htmlOutput += ",&nbsp;";
               }
-              var otherNumber = count-maxPlacesNames;
+              var otherNumber = count - maxPlacesNames;
               htmlOutput += "<em>&nbsp;and other " + otherNumber + "</em>";
               //window.alert(htmlOutput);
               return htmlOutput;
@@ -275,10 +278,10 @@
           }
 
           function populateHome(jsonHome) {
-              $("#whatsappSectionLabelCountId").html(roundPlus(jsonHome.data.whatsapp.count));
+              $("#whatsappCountLabel").html(roundPlus(jsonHome.data.whatsapp.count));
               $("#hasMediaDiv").html(buildWhatsappHasMediaIconGroup(jsonHome));
               $("#whatsappNudeSectionLabelCountId").html(jsonHome.data.whatsapp.nude.count);
-              $("#whatsappSectionLabelLatestListId").html(buildWhatsappLatestList(jsonHome));
+              $("#whatsappLatestListLabel").html(buildWhatsappLatestList(jsonHome));
               $("#whatsappContactListDiv").html(buildWhatsappIncreaseContactList4Sly(jsonHome));
               startSly();
               $("#whatsappNudeCountId").html(buildWhatsappNudeCount(jsonHome));
@@ -291,7 +294,7 @@
               $("#visitSectionPlacesLabel").html(buildVisitPlacesListAndOtherCount(jsonHome));
               /////////GEOFENCE SECTION
               $("#geofenceSectionPlacesLabel").html(buildGeofencePlacesListAndOtherCount(jsonHome));
-              window.alert("populateHome completed ");
+              //window.alert("populateHome completed ");
           }
     </script>
   </head>
@@ -313,38 +316,39 @@
         <!-- WHATSAPP-->
         <div data-role="collapsible-set"  class='my-collapsible'>
           <div class="grid">
-            <div class="col-3"><image id='whatsappIconId' src='./images/whatsappIcon.png' alt='-' style="max-width:50%;"/></div>
-            <div class="col-2"><label style="color: #32B92A" id='whatsappSectionLabelId' class="my-label-l">Whatsapp</label></div> 
+            <div class="col-2"><image id='whatsappIconImage' src='./images/whatsappIcon.png' alt='-' style="max-width:50%;"/></div>
+            <div class="col-10"><label style="color: #32B92A" id='whatsappSectionLabel' class="my-label-l">Whatsapp</label></div> 
           </div>
 
           <!--- - - - whatsapp count  & mediatype - - - - - - - -->
           <div class="grid">
+            <div class="col-2"></div>
+            <div class="col-1"><label class ="my-label-m" id='whatsappCountLabel'></label></div>
             <div class="col-1"></div>
-            <div class="col-2"><label class ="my-label-m" id='whatsappSectionLabelCountId'>-</label></div>
-            <div id ='hasMediaDiv' class="col-8">
-              <!-- whatsapp contains media type icon -->
-            </div>
-            <div class="col-1"></div>
-            <div class="col-10"><label class ="my-label-m"  id='whatsappSectionLabelLatestListId' >-</label></div> 
+            <div class="col-7" id ='hasMediaDiv' ></div>
+          </div>
+          <!--- - - - whatsapp latest - - - - - - - -->
+          <div class="grid">
+            <div class="col-2"></div>
+            <div class="col-10"><label class ="my-label-m"  id='whatsappLatestListLabel' >-</label></div> 
           </div>
           <!------ whatsapp increase ------>
           <div class="grid">
-            <div class="col-2"><image id='whatsappIncreaseId' src='./images/whatsappIncrease.png' style="max-width:50%;" alt='-'/></div>
-            <div class="col-1"><label id='whatsappIncreaseLabelSection' class="my-label-s"><b>Increase</b></label></div> 
+            <div class="col-2"><image id='whatsappIncreaseImage' src='./images/whatsappIncrease.png' style="max-width:50%;" alt='-'/></div>
+            <div class="col-8"><label id='whatsappIncreaseLabel' class="my-label-m"><b>Increase</b></label></div> 
           </div>
 
           <!------ whatsapp contacts ------>
           <div class="grid">
             <div class="col-11">
-              <div class="hsframe" id="whatsappContactListDiv">  <!--id='whatsappSectionContactListId'-->
-
-              </div>
+              <div class="hsframe" id="whatsappContactListDiv">  <!--id='whatsappSectionContactListId'--></div>
             </div>
           </div>
           <!------whatsapp nude ------>
           <div class="grid">
-            <div class="col-2"><image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:10%;" alt='-'/></div>
-            <div class="col-9"><label id='whatsappNudeSection' class="my-label-s"><b>Nude Alert</b></label></div>
+            <div class="col-2"><image id='whatsappNudeIconId' src='./images/alertNudeIcon.png' style="max-width:50%;" alt='-'/></div>
+            <div class="col-10"><label id='whatsappNudeSection' class="my-label-m"><b>Nude Alert</b></label></div>
+            <div class="col-2"></div>
             <div class="col-5"><label id='whatsappNudeCountId' class="my-label-s">-</label></div>
           </div>
         </div>
