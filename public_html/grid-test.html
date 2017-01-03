@@ -1,39 +1,68 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>ParentWeb</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!----------------------------------------- CDN JQUERY------------------------------------------------->
+  <head>
+    <title>ParentWeb</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!----------------------------------------- CDN JQUERY------------------------------------------------->
 
-        <!--
-                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-        
-                <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-                <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-        -->
-        <!----------------------------------------- LOCAL JQUERY ---------------------------------------------->
+    <!--
+            <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    
+            <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+            <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    -->
+    <!----------------------------------------- LOCAL JQUERY ---------------------------------------------->
 
-        <link rel="stylesheet" href="./js/libs/jquery-mobile/jquery.mobile.css" />
-        <link rel="stylesheet" href="./css/tg-theme.css"/>
-        <link rel="stylesheet" href="./css/my.css"/>
-        <link rel="stylesheet" href="./css/nativedroid2/nativedroid2.color.cyan.css"/>
-        <script src="./js/libs/jquery/jquery-2.2.4.js"></script>
-        <script src="./js/libs/jquery-mobile/jquery.mobile.js"></script>
-        <script src="./js/libs/jsrender/jsrender.min.js"></script>
-        <script src="./js/libs/sly/sly.min.js"></script>
-        <script src="./js/libs/multilanguage/lang.js"></script>
-        <link rel="stylesheet" href="./css/gridlex/gridlex.css"/>
+    <link rel="stylesheet" href="./js/jquery-mobile/jquery.mobile.css" />
+    <link rel="stylesheet" href="./css/tg-theme.css"/>
+    <link rel="stylesheet" href="./css/my.css"/>
+    <link rel="stylesheet" href="./css/nativedroid2/nativedroid2.color.cyan.css"/>
+    <link rel="stylesheet" href="./css/gridlex/gridlex.css"/>
 
-        <script src="./js/libs/myUtils.js"></script>
-    </head>
-    <body>
-        <div class="grid">
-            <div class="col-1">1</div>  
-            <div class="col-11">11</div> <!-- first row: one column -->
-            <div class="col-6">6</div> <!-- second row: three columns (6+3+3) -->
-            <div class="col-3">3</div>
-            <div class="col-3">3</div>
-        </div>
-    </body>
+    <script src="./js/jquery/jquery-2.2.4.js"></script>
+    <script src="./js/jquery-mobile/jquery.mobile.js"></script>
+    <script src="./js/jsrender/jsrender.min.js"></script>
+    <script src="./js/sly/sly.js"></script>
+    <script src="./js/multilanguage/lang.js"></script>
+    <script src="./js/myUtils.js"></script>
+
+    <script src="./js/p2r/p2r.min.js"></script>
+
+    <script language="javascript">
+      $("body").ready(function _onbodyready() {
+        var $state = $('#state');
+        $(".p2r-example").pullToRefresh()
+
+                .on("start.pulltorefresh", function (evt, y) {
+                  $state.html('Start!! ' + evt + ', ' + y);
+                })
+
+                .on("move.pulltorefresh", function (evt, percentage) {
+                  $state.html('Move.. ' + evt + ', ' + percentage);
+                })
+
+                .on("end.pulltorefresh", function (evt) {
+                  $state.html('End.. ' + evt);
+                  $(this).html("Pull-me please");
+                });
+      });
+    </script>
+  </head>
+
+  <body>
+  <center id='state'>
+    waiting for iteration
+  </center>
+
+  <div class='p2r-example'>
+    <div class="grid">
+      <div class="col-1">1</div>  
+      <div class="col-11">11</div> <!-- first row: one column -->
+      <div class="col-6">6</div> <!-- second row: three columns (6+3+3) -->
+      <div class="col-3">3</div>
+      <div class="col-3">3</div>
+    </div>
+  </div>
+</body>
 </html>
