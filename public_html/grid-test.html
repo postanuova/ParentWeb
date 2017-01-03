@@ -28,29 +28,71 @@
     <script src="./js/myUtils.js"></script>
 
     <script src="./js/p2r/p2r.min.js"></script>
-
+    <link rel="stylesheet" href="./css/loading-spinner/loading-spinner.css"/>
     <script language="javascript">
+//       spinner    
+      $body = $("body");
+
+      $(document).on  ({
+        load:function () {
+          window.alert("load");
+          //$body.addClass("loading");
+        },
+        ready:function  () {
+         // window.alert("ready");
+        }
+//        ajaxStart: function () {
+//          $body.addClass("loading");
+//        },
+//        ajaxStop: function () {
+//          $body.removeClass("loading");
+//        }
+      });
+
+
+
+
+
+
+//p2r
       $("body").ready(function _onbodyready() {
         var $state = $('#state');
         $(".p2r-example").pullToRefresh()
 
                 .on("start.pulltorefresh", function (evt, y) {
                   $state.html('Start!! ' + evt + ', ' + y);
+
+                  $body = $("body");
+                  //$body.removeClass("loading");
                 })
 
                 .on("move.pulltorefresh", function (evt, percentage) {
                   $state.html('Move.. ' + evt + ', ' + percentage);
+                  $body = $("body");
+//                  $body.addClass("loading");
                 })
 
                 .on("end.pulltorefresh", function (evt) {
                   $state.html('End.. ' + evt);
-                  $(this).html("Pull-me please");
+                  //$(this).html("Pull-me please");
+                  $body = $("body");
+//                  $body.removeClass("loading");
+                })
+                .on("refresh.pulltorefresh", function (evt, y) {
+                  $body = $("body");
+//                  $body.removeClass("loading");
+                  $(this).html('Refresh.. ' + evt + ', ' + y);
+                  
+                  
+                  window.alert("refresh.pulltorefresh");
                 });
+
       });
     </script>
   </head>
 
   <body>
+
   <center id='state'>
     waiting for iteration
   </center>
@@ -64,5 +106,7 @@
       <div class="col-3">3</div>
     </div>
   </div>
+
+  <div class="modal"></div>
 </body>
 </html>
