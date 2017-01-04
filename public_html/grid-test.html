@@ -28,18 +28,19 @@
     <script src="./js/myUtils.js"></script>
 
     <script src="./js/p2r/p2r.min.js"></script>
-    <link rel="stylesheet" href="./css/loading-spinner/loading-spinner.css"/>
+    <script src="./js/loading-overlay/loadingoverlay.js"></script>
+
     <script language="javascript">
 //       spinner    
       $body = $("body");
 
-      $(document).on  ({
-        load:function () {
+      $(document).on({
+        load: function () {
           window.alert("load");
           //$body.addClass("loading");
         },
-        ready:function  () {
-         // window.alert("ready");
+        ready: function () {
+          // window.alert("ready");
         }
 //        ajaxStart: function () {
 //          $body.addClass("loading");
@@ -61,30 +62,36 @@
 
                 .on("start.pulltorefresh", function (evt, y) {
                   $state.html('Start!! ' + evt + ', ' + y);
+                  $.LoadingOverlay("show");
 
-                  $body = $("body");
-                  //$body.removeClass("loading");
+//                  $body = $("body");
+//                  $body.removeClass("loading");
                 })
 
                 .on("move.pulltorefresh", function (evt, percentage) {
                   $state.html('Move.. ' + evt + ', ' + percentage);
-                  $body = $("body");
+                  $.LoadingOverlay("hide");
+
+//                  $body = $("body");
 //                  $body.addClass("loading");
                 })
 
                 .on("end.pulltorefresh", function (evt) {
                   $state.html('End.. ' + evt);
+                  //$.LoadingOverlay("show");
                   //$(this).html("Pull-me please");
-                  $body = $("body");
-//                  $body.removeClass("loading");
+                  //
+//                  $body = $("body");
+//                 $body.removeClass("loading");
+                  $.LoadingOverlay("hide");
                 })
                 .on("refresh.pulltorefresh", function (evt, y) {
                   $body = $("body");
-//                  $body.removeClass("loading");
-                  $(this).html('Refresh.. ' + evt + ', ' + y);
-                  
-                  
-                  window.alert("refresh.pulltorefresh");
+                  $body.removeClass("loading");
+                  //$(this).html('Refresh.. ' + evt + ', ' + y);
+                  $.LoadingOverlay("hide");
+
+                  //window.alert("refresh.pulltorefresh");
                 });
 
       });
@@ -99,11 +106,8 @@
 
   <div class='p2r-example'>
     <div class="grid">
-      <div class="col-1">1</div>  
-      <div class="col-11">11</div> <!-- first row: one column -->
-      <div class="col-6">6</div> <!-- second row: three columns (6+3+3) -->
-      <div class="col-3">3</div>
-      <div class="col-3">3</div>
+
+      <div class="col-11"><image id='whatsappIconImage' src='./images/whatsappIcon.png' alt='-' style="max-width:50%; "/></div>
     </div>
   </div>
 
