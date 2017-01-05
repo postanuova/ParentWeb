@@ -1,0 +1,15 @@
+In statistics:
+		
+	“date_range” è il range delle date di partenza e fine a cui si riferiscono i dati. Ad esempio, se il time frame è week, il date range sarà: “(oggi meno 6 giorni) - oggi”, se è month sarà “(oggi - 30 giorni) - oggi”, mentre se è day sarà “mezzanotte di oggi - ora attuale”.
+	Questo parametro ti serve per mostrare i giorni come footer del grafico.
+
+	“time_zone” in realtà non lo usiamo.
+
+	“numbers” è un array di integer contenente i punti del grafico. Il numero di valori cambia chiaramente in base al time frame. Se il time frame è day, il numero di valori sarà compreso tra 0 e 24, dipendendo dall’ora attuale. Se ad esempio ora sono le 16, l’array avrà 17 valori. I numeri rappresentano il numero di messaggi in quell’ora. Ad esempio, il valore numero 0 rappresenta il numero di messaggi dalle 00.00 alle 00.59.
+Se il time frame è week, il numero di valori di “numbers” sarà sempre 7, e rappresenta il numero di messaggi di ogni giorno del “time_range”.
+Se il time_frame è month, il numero del valori di “numbers” sarà sempre 31, e rappresenta il numero di messaggi di ogni giorno del “time_range”, come per “week”.
+
+“numbers” all’interno delle chat ha la stessa funzione, e serve per mostrare il dettaglio di una singola chat senza fare altre chiamate API. Avendo “numbers”, nome e numero di telefono si può infatti compilare quella schermata senza richiedere nient’altro al server.
+Stesso principio per l’elemento “nude” in ogni chat: serve per poter compilare la pagina dei dettagli senza interpellare di nuovo il server.
+
+
