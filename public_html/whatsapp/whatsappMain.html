@@ -30,6 +30,7 @@
     <script src="../js/p2r/p2r.min.js"></script>
     <script src="../js/loading-overlay/loadingoverlay.js"></script>
     <script src="../js/p2r/p2rAndLoadingOverlay.js"></script>
+    <script src="../js/highcharts/highcharts.js"></script>
     <link rel="stylesheet" href="../js/loading-overlay/loadingoverlay.css"/>
     <script>
       //GLOBAL VARIABLES
@@ -43,6 +44,7 @@
         //window.alert("document.ready");
       });
     </script>
+    
     <script language="javascript">
       function ciao() {
         //window.alert("callback ciao");
@@ -85,9 +87,58 @@
       function populateWhatsappMain(json) {
         ////////////NUDE SECTION
         $("#whatsappNudeCountId").html(buildNudeCount(json.data.nude.count));
+        drawChart();
       }
     </script>
 
+    <script>
+      function drawChart() {
+        $(function () { 
+    var myChart = Highcharts.chart('whatsappChartDiv', {
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Whatsapp'
+        },
+        xAxis: {
+//            categories: ['Apples', 'Bananas', 'Oranges']
+        },
+        yAxis: {
+            title: {
+//                text: 'Fruit eaten'
+            }
+        },
+        series: [{
+            name: 'Chats',
+            data: [
+                        433,
+                        765,
+                        396,
+                        539,
+                        552,
+                        966,
+                        823,
+                        748,
+                        467,
+                        874,
+                        328,
+                        245,
+                        984,
+                        684,
+                        315,
+                        808,
+                        779,
+                        407,
+                        227,
+                        269
+                        ]
+        }]
+    });
+});
+      }
+    </script>
+    
   </head>
   <body>
     <!-------------------------------HOME PAGE------------------------------------------- -->
@@ -111,12 +162,15 @@
               <div class="col-2"><image id='whatsappIconImage' src='../images/whatsappIcon.png' alt='-' style="max-width:50%; "/></div>
               <div class="col-10"><label style="color: #32B92A; " id='whatsappSectionLabel' class="my-label-l">Whatsapp</label></div> 
             </div>
+            <!-- chart -->
             <div class="grid">
               <div class="col-11">
-                [GRAPHIC PLACEHOLDER]
+                <div id="whatsappChartDiv">
+                  [CHART PLACEHOLDER]
+                </div>
               </div>
             </div>
-            <!------whatsapp nude ------>
+            <!-- whatsapp nude -->
             <div class="grid">
               <div class="col-2"><image id='whatsappNudeIconId' src='../images/alertNudeIcon.png' style="max-width:50%;" alt='-'/></div>
               <div class="col-10"><label id='whatsappNudeSection' class="my-label-m"><b>Nude Alert</b></label></div>

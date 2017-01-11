@@ -6,5 +6,14 @@
 
 
 function testLibary() {
-    alert("library fetched!");
+  alert("library fetched!");
+}
+
+function buildNudeCount(nudeCount) {
+  if (nudeCount == 0)
+    return "No nudes detected";
+  if (nudeCount == 1)
+    return nudeCount + " nude detected";
+  if (nudeCount > 1)
+    return nudeCount + " nudes detected";
 }
