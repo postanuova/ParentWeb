@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>TODO supply a title</title>
+    <title>ParentWeb</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!----------------------------------------- CDN JQUERY------------------------------------------------->
@@ -85,7 +85,9 @@
 
     <script id="contactVerticalTemplate" type="text/x-jsrender">
       {{if first_name}}
+
       <li>
+        <a href="../whatsapp/whatsappSingle.html?id={{:id}}" data-transition="pop" style="text-decoration: none">
         <div class="grid">
           <div class="col-2">
             <img src='../images/circleLightGreenIcon.png' style="max-width:30%;" alt=''/>
@@ -111,7 +113,9 @@
           {{/if}}
           </div>
         </div>
+        </a>
       </li>
+      
       {{/if}}
       {{if is_group}}
       <li style="width: 100px;">
@@ -135,7 +139,7 @@
         var sly = new Sly(contactDiv, {
           horizontal: false,
           itemNav: 'basic',
-          smart: true,
+          smart: false,
           scrollBy: 1,
           mouseDragging: 1,
           touchDragging: 1,
@@ -146,8 +150,23 @@
           elasticBounds: 1,
           speed: 600,
           startAt: 0
-        });
+        }
+//        ,
+//        {
+//          cyclez:console.log("sly cycle"),
+//          move:console.log("sly move"),
+//          change:console.log("sly change"),
+//          activePage:console.log("sly activePage")
+//        }
+                );
+        
+//        sly.slideTo(10,false);//Animate SLIDEE to a specific position
+        sly.on('moveEnd',console.log("on moveEnd"));
+        sly.on('activePage',console.log("on activePage"));
+        sly.on('perdio',console.log("on perdio"));
+        sly.a
         sly.init();
+        sly.off('perdio',console.log("off perdio"));
       }
 
 
@@ -208,7 +227,11 @@
   <body>
     <!-------------------------------HOME PAGE------------------------------------------- -->
     <div id="homePage" data-role="page">
-
+<!-- popup -->
+          
+          <div data-role="popup" id="popupBasic">
+	<p>This is a completely basic popup, no options set.<p>
+          </div>
       <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" data-position="fixed">
         <div id="headerNavbarId" data-role="navbar" >
           <ul>
@@ -221,6 +244,7 @@
 
       <div role="main" class="ui-content">
         <div class="p2rDiv">
+          <a href="#popupBasic" data-rel="popup">Open Popup</a>
           <!-- WHATSAPP-->
           <div data-role="collapsible-set"  class='my-collapsible'>
             <div class="grid">
@@ -243,6 +267,7 @@
               <div class="col-5"><label id='whatsappNudeCountId' class="my-label-s">-</label></div>
             </div>
           </div>
+          <!-- chat list sly -->
           <div data-role="collapsible-set"  class='my-collapsible'>
             <div class="grid">
               <div class="col-11">
@@ -250,6 +275,8 @@
               </div>
             </div>
           </div>
+          
+</div>
         </div> <!-- p2r div -->
       </div><!-- /content -->
 
