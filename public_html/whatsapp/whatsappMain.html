@@ -34,20 +34,22 @@
     <link rel="stylesheet" href="../js/loading-overlay/loadingoverlay.css"/>
     <script>
       //GLOBAL VARIABLES
-      var whatsappMainUrl = "http://92.222.83.28/parent/whatsapp.php?time_frame=day";
+      var whatsappMainUrl = "http://92.222.83.28/parent/whatsapp.php";
+
+
 
       window.onload = function (e) {
         console.log("onload");
-        doGetWhatsappMainJson("day");
+        //doGetWhatsappMainJson("day");
       };
       $(document).ready(function () {
         console.log("ready");
+        doGetWhatsappMainJson("day");
       });
     </script>
 
     <script>
-      function drawChart(numbersAR) {
-        console.log("numbers " + numbersAR);
+      function drawChart(numbersAR, timeFrame) {
         $(function () {
           var myChart = Highcharts.chart('whatsappChartDiv', {
             chart: {
@@ -65,7 +67,7 @@
               }
             },
             series: [{
-                name: 'Chats',
+                name: timeFrame,
 //            color:'#32B92A',
                 color: {
                   linearGradient: {x1: 0, x2: 0, y1: 0, y2: 1},
@@ -88,8 +90,25 @@
           <div class="col-2">
             <img src='../images/circleLightGreenIcon.png' style="max-width:30%;" alt=''/>
           </div>
-          <div class="col-10">
-            <label class="my-label-m"><b>{{:first_name}}</b></label>
+          <div class="col-5">
+            <label class="my-label-m"><b>{{:first_name}} {{:last_name}}</b></label>
+          </div>
+          <div class="col-1">
+            <label class="my-label-m"><em>{{:count}}</em></label>
+          </div>
+          <div class="col-4">
+          {{if has_text}} 
+            <img src='../images/whatsappHasMessage.png' style='max-width:10%;' alt='-'/>
+          {{/if}}
+          {{if has_image}}
+            &nbsp;<img src='../images/whatsappHasPicture.png' style='max-width:10%;' alt='-'/>
+          {{/if}}
+          {{if has_video}}
+            &nbsp;<img src='../images/photoHasVideo.png' style='max-width:10%;' alt='-'/>
+          {{/if}}
+          {{if has_audio}}
+            &nbsp;<img src='../images/whatsappHasVocalMessage.png' style='max-width:10%;' alt='-'/>
+          {{/if}}
           </div>
         </div>
       </li>
@@ -152,13 +171,12 @@
       function doGetWhatsappMainJson(timeFrame) {
         console.log("doGetWhatsappMainJson " + timeFrame);
         $.ajax({
-          //url: whatsappMainUrl,
-          url: 'http://92.222.83.28/parent/whatsapp.php?time_frame=day',
+          url: whatsappMainUrl,
           type: 'GET',
           crossDomain: true,
           jsonp: 'callback',
           jsonpCallback: 'ciao',
-          //data: "time_frame=" + timeFrame,
+          data: "time_frame=" + timeFrame,
           dataType: 'jsonp',
 //            data: {
 //           format: 'jsonp'
@@ -168,11 +186,8 @@
             window.alert("error");
           },
           success: function (data, textStatus, jqXHR) {
-            console.log("success data " + data);
-            //var jsonObject = eval('(' + data + ')');
-            console.log("whatsapp " + data.data.statistics.time_frame);
+            console.log("success data " + data.data.statistics.time_frame);
             populateWhatsappMain(data);
-
           }
         });
       }
@@ -181,7 +196,7 @@
         ////////////NUDE SECTION
         $("#whatsappNudeCountId").html(buildNudeCount(json.data.nude.count));
         //alert(json.data.statistics.numbers);
-        drawChart(json.data.statistics.numbers);
+        drawChart(json.data.statistics.numbers, json.data.statistics.time_frame);
         $('#chatsListDiv').html(buildWhatsappChatList4Sly(json));
         startSly();
       }
@@ -216,7 +231,7 @@
             <div class="grid">
               <div class="col-11">
                 <div id="whatsappChartDiv">
-                  <img src="../images/loading/grey_dots_loading.gif" style="max-width:30%;" alt='-'/>
+                  <div class="col-11"><img src="../images/loading/grey_dots_loading.gif" style="max-width:30%;" alt='-'/></div>
                 </div>
               </div>
             </div>

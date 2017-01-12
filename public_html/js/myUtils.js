@@ -17,3 +17,16 @@ function buildNudeCount(nudeCount) {
   if (nudeCount > 1)
     return nudeCount + " nudes detected";
 }
+
+function buildMediaIconGroup(hasText, hasImage, hasVideo, hasAudio) {
+  var htmlOutput = "";
+  if (hasText)
+    htmlOutput += "<img src='../images/whatsappHasMessage.png' style='max-width:10%;' alt='-'/>";
+  if (hasImage)
+    htmlOutput += "&nbsp;<img src='../images/whatsappHasPicture.png' style='max-width:10%;' alt='-'/>";
+  if (hasVideo)
+    htmlOutput += "&nbsp;<img src='../images/photoHasVideo.png' style='max-width:10%;' alt='-'/>";
+  if (hasAudio)
+    htmlOutput += "&nbsp;<img src='../images/whatsappHasVocalMessage.png' style='max-width:10%;' alt='-'/>";
+  return htmlOutput;
+}
