@@ -85,11 +85,11 @@
       {{if first_name}}
       <li>
         <div class="grid">
-          <div class="col-5">
-            <image src='../images/circleLightGreenIcon.png' style="max-width:30%;" alt='-'/>
+          <div class="col-2">
+            <image src='../images/circleLightGreenIcon.png' style="max-width:30%;" alt=''/>
           </div>
-          <div class="col-7">
-            <label class="my-label-m">{{:first_name}}</label>
+          <div class="col-10">
+            <label class="my-label-m"><b>{{:first_name}}</b></label>
           </div>
         </div>
       </li>
@@ -114,9 +114,9 @@
         contactDiv.sly('destroy');
         //'use strict';
         var sly = new Sly(contactDiv, {
-          vertical: 1,
+          horizontal: false,
           itemNav: 'basic',
-          smart: 0,
+          smart: true,
           scrollBy: 1,
           mouseDragging: 1,
           touchDragging: 1,
@@ -136,12 +136,9 @@
         var chatsAR = json.data.chats;
         var template = $.templates("#contactVerticalTemplate");
         var htmlOutput = template.render(chatsAR);
-        htmlOutput = "<ul class='slidee'>" +
+        htmlOutput = "<ul class='slidee' style='list-style-type: none;'>" +
                 htmlOutput +
                 "</ul>";
-
-        //
-        htmlOutput = "<div class='frame smart' id='smart'><ul class='items'><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li><li>21</li><li>22</li><li>23</li><li>24</li><li>25</li><li>26</li><li>27</li><li>28</li><li>29</li></ul></div>";
         return htmlOutput;
       }
     </script>
@@ -200,9 +197,9 @@
       <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" data-position="fixed">
         <div id="headerNavbarId" data-role="navbar" >
           <ul>
-            <li><a href="#" data-iconshadow="false" class="ui-btn-active" >Day</a></li>
-            <li><a href="#" data-iconshadow="false">Week</a></li>
-            <li><a href="#" data-iconshadow="false">Month</a></li>
+            <li><a href="javascript:doGetWhatsappMainJson('day')" data-iconshadow="false" class="ui-btn-active" >Day</a></li>
+            <li><a href="javascript:doGetWhatsappMainJson('week')" data-iconshadow="false">Week</a></li>
+            <li><a href="javascript:doGetWhatsappMainJson('month')" data-iconshadow="false">Month</a></li>
           </ul>
         </div>
       </div>
@@ -234,7 +231,7 @@
           <div data-role="collapsible-set"  class='my-collapsible'>
             <div class="grid">
               <div class="col-11">
-                <div class="hsframe" id="chatsListDiv">  <!--id='whatsappSectionContactListId'--></div>
+                <div id="chatsListDiv"></div>
               </div>
             </div>
           </div>
