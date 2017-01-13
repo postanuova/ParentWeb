@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../js/jquery-mobile/jquery.mobile.css" />
     <link rel="stylesheet" href="../css/tg-theme.css"/>
     <link rel="stylesheet" href="../css/my.css"/>
-    <link rel="stylesheet" href="../js/nativedroid2/nativedroid2.color.cyan.css"/>
+    <!--<link rel="stylesheet" href="../js/nativedroid2/nativedroid2.color.cyan.css"/>-->
     <link rel="stylesheet" href="../css/gridlex/gridlex.css"/>
 
     <script src="../js/jquery/jquery-2.2.4.js"></script>
@@ -39,7 +39,8 @@
 
       window.onload = function (e) {
 //        doGetHomeJsonLocal("day");
-        doGetHomeJson("day");
+        //doGetHomeJson("day");
+        dayClicked();
       };
 
 //$("body").ready(p2rAndLoadingOverlay());
@@ -164,7 +165,7 @@
           return buildMediaIconGroup(hasText, hasImage, hasVideo, hasAudio);
         }
 
-        
+
         /**
          * 
          * @param {jsonHome} jsonHome
@@ -284,17 +285,55 @@
           //window.alert("populateHome completed ");
         }
     </script>
+    <script>
+        function dayClicked() {
+          console.log("day clicked");
+          doGetHomeJson('day');
+//          $("#dayBtn").addClass("ui-btn-active");
+        }
+        function weekClicked() {
+          doGetHomeJson('week');
+          console.log("week clicked");
+//          $("#weekBtn").addClass("ui-btn-active");
+        }
+        function monthClicked() {
+          console.log("month clicked");
+          doGetHomeJson('month');
+//          $("#monthBtn").addClass("ui-btn-active");
+        }
+
+        function whatsappClicked() {
+          console.log("whatsapp clicked");
+          //window.location ="../whatsapp/whatsappMain.html";
+        }
+
+        function photoClicked() {
+          console.log("photo clicked");
+        }
+
+        function homeClicked() {
+          console.log("home clicked");
+        }
+
+        function positionClicked() {
+          console.log("position clicked");
+        }
+
+        function geofenceClicked() {
+          console.log("geofence clicked");
+        }
+    </script>
   </head>
   <body>
-    <!-------------------------------HOME PAGE------------------------------------------- -->
+    <!-- ***************************** HOME PAGE***************************** -->
     <div id="homePage" data-role="page">
 
       <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" data-position="fixed">
         <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
           <ul>
-            <li><a href="javascript:doGetHomeJson('day')" data-iconshadow="false" class="ui-btn-active" >Day</a></li>
-            <li><a href="javascript:doGetHomeJson('week')" data-iconshadow="false">Week</a></li>
-            <li><a href="javascript:doGetHomeJson('month')" data-iconshadow="false">Month</a></li>
+            <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active">Day</a></li>
+            <li><a href="#" onclick="weekClicked()" id="weekBtn">Week</a></li>
+            <li><a href="#" onclick="monthClicked()" id="monthBtn">Month</a></li>
           </ul>
         </div>
       </div>
@@ -393,15 +432,14 @@
       </div><!-- /content -->
 
       <!-------------------------------FOOTER------------------------------------------- -->
-      <div data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
-        <div id="footerNavbarId" data-role="navbar" >
+      <div id="footer" data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
+        <div id="footerNavbarId" data-role="navbar" style=" width: 100%">
           <ul>
-
-            <li><a href="../whatsapp/whatsappMain.html" data-transition="pop" data-icon="phone" data-iconshadow="false" data-iconpos="notext"></a></li>
-            <li><a href="../home/home.html" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
-            <li><a href="#" data-icon="home" data-iconshadow="false"  data-iconpos="notext" class="ui-btn-active"></a></li>
-            <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
-            <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
+            <li><a href="../whatsapp/whatsappMain.html" onclick="whatsappClicked()" id="whatsappBtn" data-transition="pop" data-icon="phone" data-iconpos="notext"></a></li>
+            <li><a href="../home/home.html" id="photoBtn" data-icon="camera"   data-iconpos="notext"></a></li>
+            <li><a href="#" data-icon="home" id="homeBtn" data-iconpos="notext" class="ui-btn-active"></a></li>
+            <li><a href="#" data-icon="location" id="positionBtn" data-iconpos="notext"></a></li>
+            <li><a  href="#editGeofencesPage" onclick="loadGeofences()" id="geofenceBtn" data-icon="tag" data-iconpos="notext"></a></li>
           </ul>
         </div>
       </div>

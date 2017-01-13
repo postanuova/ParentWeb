@@ -40,11 +40,12 @@
 
       window.onload = function (e) {
         console.log("onload");
+        dayClicked();
         //doGetWhatsappMainJson("day");
       };
       $(document).ready(function () {
         console.log("ready");
-        doGetWhatsappMainJson("day");
+        //doGetWhatsappMainJson("day");
       });
     </script>
 
@@ -87,35 +88,35 @@
       {{if first_name}}
 
       <li>
-        <a href="../whatsapp/whatsappSingle.html?id={{:id}}" data-transition="pop" style="text-decoration: none">
-        <div class="grid">
-          <div class="col-2">
-            <img src='../images/circleLightGreenIcon.png' style="max-width:30%;" alt=''/>
-          </div>
-          <div class="col-5">
-            <label class="my-label-m"><b>{{:first_name}} {{:last_name}}</b></label>
-          </div>
-          <div class="col-1">
-            <label class="my-label-m"><em>{{:count}}</em></label>
-          </div>
-          <div class="col-4">
-          {{if has_text}} 
-            <img src='../images/whatsappHasMessage.png' style='max-width:10%;' alt='-'/>
-          {{/if}}
-          {{if has_image}}
-            &nbsp;<img src='../images/whatsappHasPicture.png' style='max-width:10%;' alt='-'/>
-          {{/if}}
-          {{if has_video}}
-            &nbsp;<img src='../images/photoHasVideo.png' style='max-width:10%;' alt='-'/>
-          {{/if}}
-          {{if has_audio}}
-            &nbsp;<img src='../images/whatsappHasVocalMessage.png' style='max-width:10%;' alt='-'/>
-          {{/if}}
-          </div>
-        </div>
-        </a>
+      <a href="../whatsapp/whatsappSingle.html?id={{:id}}" data-transition="pop" style="text-decoration: none">
+      <div class="grid">
+      <div class="col-2">
+      <img src='../images/circleLightGreenIcon.png' style="max-width:30%;" alt=''/>
+      </div>
+      <div class="col-5">
+      <label class="my-label-m"><b>{{:first_name}} {{:last_name}}</b></label>
+      </div>
+      <div class="col-1">
+      <label class="my-label-m"><em>{{:count}}</em></label>
+      </div>
+      <div class="col-4">
+      {{if has_text}} 
+      <img src='../images/whatsappHasMessage.png' style='max-width:10%;' alt='-'/>
+      {{/if}}
+      {{if has_image}}
+      &nbsp;<img src='../images/whatsappHasPicture.png' style='max-width:10%;' alt='-'/>
+      {{/if}}
+      {{if has_video}}
+      &nbsp;<img src='../images/photoHasVideo.png' style='max-width:10%;' alt='-'/>
+      {{/if}}
+      {{if has_audio}}
+      &nbsp;<img src='../images/whatsappHasVocalMessage.png' style='max-width:10%;' alt='-'/>
+      {{/if}}
+      </div>
+      </div>
+      </a>
       </li>
-      
+
       {{/if}}
       {{if is_group}}
       <li style="width: 100px;">
@@ -158,15 +159,15 @@
 //          change:console.log("sly change"),
 //          activePage:console.log("sly activePage")
 //        }
-                );
-        
+        );
+
 //        sly.slideTo(10,false);//Animate SLIDEE to a specific position
-        sly.on('moveEnd',console.log("on moveEnd"));
-        sly.on('activePage',console.log("on activePage"));
-        sly.on('perdio',console.log("on perdio"));
+        sly.on('moveEnd', console.log("on moveEnd"));
+        sly.on('activePage', console.log("on activePage"));
+        sly.on('perdio', console.log("on perdio"));
         sly.a
         sly.init();
-        sly.off('perdio',console.log("off perdio"));
+        sly.off('perdio', console.log("off perdio"));
       }
 
 
@@ -221,30 +222,65 @@
       }
     </script>
 
+<script>
+        function dayClicked() {
+          console.log("day clicked");
+          doGetWhatsappMainJson()('day');
+//          $("#dayBtn").addClass("ui-btn-active");
+        }
+        function weekClicked() {
+          doGetWhatsappMainJson('week');
+          console.log("week clicked");
+//          $("#weekBtn").addClass("ui-btn-active");
+        }
+        function monthClicked() {
+          console.log("month clicked");
+          doGetWhatsappMainJson('month');
+//          $("#monthBtn").addClass("ui-btn-active");
+        }
 
+        function whatsappClicked() {
+          console.log("whatsapp clicked");
+          //window.location ="../whatsapp/whatsappMain.html";
+        }
+
+        function photoClicked() {
+          console.log("photo clicked");
+        }
+
+        function homeClicked() {
+          console.log("home clicked");
+        }
+
+        function positionClicked() {
+          console.log("position clicked");
+        }
+
+        function geofenceClicked() {
+          console.log("geofence clicked");
+        }
+    </script>
 
   </head>
   <body>
     <!-------------------------------HOME PAGE------------------------------------------- -->
     <div id="homePage" data-role="page">
-<!-- popup -->
-          
-          <div data-role="popup" id="popupBasic">
-	<p>This is a completely basic popup, no options set.<p>
-          </div>
+      <!-- popup -->
+
+
       <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" data-position="fixed">
-        <div id="headerNavbarId" data-role="navbar" >
+        <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
           <ul>
-            <li><a href="javascript:doGetWhatsappMainJson('day')" data-iconshadow="false" class="ui-btn-active" >Day</a></li>
-            <li><a href="javascript:doGetWhatsappMainJson('week')" data-iconshadow="false">Week</a></li>
-            <li><a href="javascript:doGetWhatsappMainJson('month')" data-iconshadow="false">Month</a></li>
+            <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active">Day</a></li>
+            <li><a href="#" onclick="weekClicked()" id="weekBtn">Week</a></li>
+            <li><a href="#" onclick="monthClicked()" id="monthBtn">Month</a></li>
           </ul>
         </div>
       </div>
 
       <div role="main" class="ui-content">
         <div class="p2rDiv">
-          <a href="#popupBasic" data-rel="popup">Open Popup</a>
+
           <!-- WHATSAPP-->
           <div data-role="collapsible-set"  class='my-collapsible'>
             <div class="grid">
@@ -275,26 +311,24 @@
               </div>
             </div>
           </div>
-          
-</div>
-        </div> <!-- p2r div -->
-      </div><!-- /content -->
+      </div> <!-- p2r div -->
+    </div><!-- /content -->
 
-      <!-------------------------------FOOTER------------------------------------------- -->
-      <div data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
-        <div id="footerNavbarId" data-role="navbar" >
-          <ul>
-            <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext" class="ui-btn-active"></a></li>
-            <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
-            <li><a href="../home/home.html" data-icon="home" data-iconshadow="false"  data-iconpos="notext"></a></li>
-            <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
-            <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
-          </ul>
-        </div>
+    <!-------------------------------FOOTER------------------------------------------- -->
+    <div data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
+      <div id="footerNavbarId" data-role="navbar" >
+        <ul>
+          <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext" class="ui-btn-active"></a></li>
+          <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
+          <li><a href="../home/home.html" data-icon="home" data-iconshadow="false"  data-iconpos="notext"></a></li>
+          <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
+          <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
+        </ul>
       </div>
-      <!-------------------------------/FOOTER------------------------------------------- -->
-    </div><!-- /page -->
-    <!-------------------------------/HOME PAGE------------------------------------------- -->
+    </div>
+    <!-------------------------------/FOOTER------------------------------------------- -->
+  </div><!-- /page -->
+  <!-------------------------------/HOME PAGE------------------------------------------- -->
 
-  </body>
+</body>
 </html>
