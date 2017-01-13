@@ -45,6 +45,7 @@
       };
       $(document).ready(function () {
         console.log("ready");
+        dayClicked();
         //doGetWhatsappMainJson("day");
       });
     </script>
@@ -162,12 +163,11 @@
         );
 
 //        sly.slideTo(10,false);//Animate SLIDEE to a specific position
-        sly.on('moveEnd', console.log("on moveEnd"));
-        sly.on('activePage', console.log("on activePage"));
-        sly.on('perdio', console.log("on perdio"));
-        sly.a
+//        sly.on('moveEnd', console.log("on moveEnd"));
+//        sly.on('activePage', console.log("on activePage"));
+//        sly.on('perdio', console.log("on perdio"));
         sly.init();
-        sly.off('perdio', console.log("off perdio"));
+//        sly.off('perdio', console.log("off perdio"));
       }
 
 
@@ -222,43 +222,43 @@
       }
     </script>
 
-<script>
-        function dayClicked() {
-          console.log("day clicked");
-          doGetWhatsappMainJson()('day');
-//          $("#dayBtn").addClass("ui-btn-active");
-        }
-        function weekClicked() {
-          doGetWhatsappMainJson('week');
-          console.log("week clicked");
-//          $("#weekBtn").addClass("ui-btn-active");
-        }
-        function monthClicked() {
-          console.log("month clicked");
-          doGetWhatsappMainJson('month');
-//          $("#monthBtn").addClass("ui-btn-active");
-        }
+    <script>
+      function dayClicked() {
+        doGetWhatsappMainJson('day');
+        console.log("wa day clicked");
+        //          $("#dayBtn").addClass("ui-btn-active");
+      }
+      function weekClicked() {
+        doGetWhatsappMainJson('week');
+        console.log("wa week clicked");
+        //          $("#weekBtn").addClass("ui-btn-active");
+      }
+      function monthClicked() {
+        console.log("wa month clicked");
+        doGetWhatsappMainJson('month');
+        //          $("#monthBtn").addClass("ui-btn-active");
+      }
 
-        function whatsappClicked() {
-          console.log("whatsapp clicked");
-          //window.location ="../whatsapp/whatsappMain.html";
-        }
+      function whatsappClicked() {
+        console.log("whatsapp clicked");
+        //window.location ="../whatsapp/whatsappMain.html";
+      }
 
-        function photoClicked() {
-          console.log("photo clicked");
-        }
+      function photoClicked() {
+        console.log("photo clicked");
+      }
 
-        function homeClicked() {
-          console.log("home clicked");
-        }
+      function homeClicked() {
+        console.log("home clicked");
+      }
 
-        function positionClicked() {
-          console.log("position clicked");
-        }
+      function positionClicked() {
+        console.log("position clicked");
+      }
 
-        function geofenceClicked() {
-          console.log("geofence clicked");
-        }
+      function geofenceClicked() {
+        console.log("geofence clicked");
+      }
     </script>
 
   </head>
@@ -268,7 +268,7 @@
       <!-- popup -->
 
 
-      <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" data-position="fixed">
+      <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" >
         <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
           <ul>
             <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active">Day</a></li>
@@ -311,24 +311,24 @@
               </div>
             </div>
           </div>
-      </div> <!-- p2r div -->
-    </div><!-- /content -->
+        </div> <!-- p2r div -->
+      </div><!-- /content -->
 
-    <!-------------------------------FOOTER------------------------------------------- -->
-    <div data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
-      <div id="footerNavbarId" data-role="navbar" >
-        <ul>
-          <li><a href="#" data-icon="phone" data-iconshadow="false" data-iconpos="notext" class="ui-btn-active"></a></li>
-          <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
-          <li><a href="../home/home.html" data-icon="home" data-iconshadow="false"  data-iconpos="notext"></a></li>
-          <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
-          <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
-        </ul>
+      <!-------------------------------FOOTER------------------------------------------- -->
+      <div data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
+        <div id="footerNavbarId" data-role="navbar" >
+          <ul>
+            <li><a href="../whatsapp/whatsappMain.html" data-icon="phone" data-ajax="false" data-iconshadow="false" data-iconpos="notext" class="ui-btn-active"></a></li>
+            <li><a href="#" data-icon="camera" data-iconshadow="false"  data-iconpos="notext"></a></li>
+            <li><a href="../home/home.html" data-ajax="false" data-icon="home" data-iconshadow="false"  data-iconpos="notext"></a></li>
+            <li><a href="#" data-icon="location" data-iconshadow="false"  data-iconpos="notext"></a></li>
+            <li><a onclick="loadGeofences()" href="#editGeofencesPage" data-icon="tag" data-iconshadow="false"  data-iconpos="notext"></a></li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <!-------------------------------/FOOTER------------------------------------------- -->
-  </div><!-- /page -->
-  <!-------------------------------/HOME PAGE------------------------------------------- -->
+      <!-------------------------------/FOOTER------------------------------------------- -->
+    </div><!-- /page -->
+    <!-------------------------------/HOME PAGE------------------------------------------- -->
 
-</body>
+  </body>
 </html>

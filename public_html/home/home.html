@@ -287,17 +287,17 @@
     </script>
     <script>
         function dayClicked() {
-          console.log("day clicked");
+          console.log("ho day clicked");
           doGetHomeJson('day');
 //          $("#dayBtn").addClass("ui-btn-active");
         }
         function weekClicked() {
           doGetHomeJson('week');
-          console.log("week clicked");
+          console.log("ho week clicked");
 //          $("#weekBtn").addClass("ui-btn-active");
         }
         function monthClicked() {
-          console.log("month clicked");
+          console.log("ho month clicked");
           doGetHomeJson('month');
 //          $("#monthBtn").addClass("ui-btn-active");
         }
@@ -328,7 +328,7 @@
     <!-- ***************************** HOME PAGE***************************** -->
     <div id="homePage" data-role="page">
 
-      <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" data-position="fixed">
+      <div id="header" data-role="header" data-id="fixedHeader" data-position="fixed" data-theme="a">
         <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
           <ul>
             <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active">Day</a></li>
@@ -435,10 +435,10 @@
       <div id="footer" data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
         <div id="footerNavbarId" data-role="navbar" style=" width: 100%">
           <ul>
-            <li><a href="../whatsapp/whatsappMain.html" onclick="whatsappClicked()" id="whatsappBtn" data-transition="pop" data-icon="phone" data-iconpos="notext"></a></li>
-            <li><a href="../home/home.html" id="photoBtn" data-icon="camera"   data-iconpos="notext"></a></li>
+            <li><a href="../whatsapp/whatsappMain.html" data-ajax="false" onclick="whatsappClicked()" id="whatsappBtn" data-transition="pop" data-icon="phone" data-iconpos="notext"></a></li>
+            <li><a href="../home/home.html" id="photoBtn" data-ajax="false" data-icon="camera"   data-iconpos="notext"></a></li>
             <li><a href="#" data-icon="home" id="homeBtn" data-iconpos="notext" class="ui-btn-active"></a></li>
-            <li><a href="#" data-icon="location" id="positionBtn" data-iconpos="notext"></a></li>
+            <li><a href="#" data-icon="location" id="positionBtn " data-iconpos="notext"></a></li>
             <li><a  href="#editGeofencesPage" onclick="loadGeofences()" id="geofenceBtn" data-icon="tag" data-iconpos="notext"></a></li>
           </ul>
         </div>
