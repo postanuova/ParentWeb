@@ -1,0 +1,47 @@
+{
+  "meta": [],
+  "data": {
+    "statistics": {
+      "time_frame": "day",
+      "date_range": "20170116000000-20170116151127",
+      "time_zone": "+0100"
+    },
+    "nude": {
+      "count": 2
+    },
+    "chats": [
+      {
+        "id": "19915110",
+        "first_name": "",
+        "last_name": "",
+        "phone_number": "34895395828",
+        "count": 463,
+        "has_text": true,
+        "has_image": false,
+        "has_video": false,
+        "has_audio": false,
+        "numbers": [
+          153,
+          858,
+          250,
+          533,
+          384,
+          829,
+          659,
+          168,
+          560,
+          203,
+          271,
+          433,
+          948,
+          392,
+          228,
+          611
+        ]
+      }
+    ]
+  },
+  "pagination": {
+    "eof": true
+  }
+}
