@@ -91,8 +91,10 @@
     </script>
 
     <script id="contactHorizontalTemplate" type="text/x-jsrender">
+      
       {{if first_name}}
       <li style="width: 100px;">
+      <a href="../whatsapp/whatsappSingle.html?id={{:id}}&time_frame=day" data-ajax="false" data-transition="pop" style="text-decoration: none">
       <div class="grid">
       <div class="col-11">
       <img src='../images/circleLightGreenIcon.png' style="max-width:30%;" alt='-'/>
@@ -113,6 +115,7 @@
       <label class="my-label-m">{{:title}}</label>
       </div>
       </div>
+      </a>
       </li>
       {{/if}}
     </script>
@@ -329,6 +332,10 @@
     <div id="homePage" data-role="page">
 
       <div id="header" data-role="header" data-id="fixedHeader" data-position="fixed" data-theme="a">
+        <div  data-role="navbar" style=" width: 100%">
+          <h1>Home</h1>
+
+        </div>
         <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
           <ul>
             <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active">Day</a></li>
