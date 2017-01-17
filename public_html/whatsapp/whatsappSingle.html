@@ -42,14 +42,14 @@
 
 
       window.onload = function (e) {
-        console.log("onload");
-        var url = "http://92.222.83.28/parent/whatsapp.php?id=19915110&time_frame=day";
-        var parameters = url.split("?")[1];
+        //http://stackoverflow.com/questions/16518912/pass-parameter-between-pages-using-jquery-mobile
+        console.log("onload url" + window.location.href);
+        var parameters = window.location.href.split("?")[1];
         parameters = parameters.replace("id=", "");
         parameters = parameters.replace("time_frame=", "");
         var id = parameters.split("&")[0];
         var timeFrame = parameters.split("&")[1];
-        alert("id " + id + " timeFrame " + timeFrame);
+//        alert("id " + id + " timeFrame " + timeFrame);
         doGetWhatsappSingleJson(id, timeFrame);
         //doGetWhatsappMainJson("day");
       };
@@ -60,16 +60,7 @@
         //doGetWhatsappMainJson("day");
       });
 
-      $(document).on('pagebeforeshow', "#index", function (event, data) {
-        //var parameters = $(this).data("url").split("?")[1];//parte a dx di ?
-        var url = "http://92.222.83.28/parent/whatsapp.php?id=19915110&time_frame=day";
-        var parameters = url.split("?")[1];
-        parameters = parameters.replace("id=", "");
-        parameters = parameters.replace("time_frame=", "");
-        id = parameters.split(",")[0];
-        timeFrame = parameters.split(",")[1];
-        alert("id " + id + " timeFrame");
-      });
+      
 
     </script>
 
