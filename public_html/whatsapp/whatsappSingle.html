@@ -36,8 +36,8 @@
       //GLOBAL VARIABLES
       var whatsappMainUrl = "http://92.222.83.28/parent/whatsapp.php";
       var whatsappSingleUrl = "unknown";
-//      var timeFrame ="unkonwn";
-//      var id="unknown";
+      var timeFrame = "unkonwn";
+      var id = "unknown";
 
 
 
@@ -47,8 +47,17 @@
         var parameters = window.location.href.split("?")[1];
         parameters = parameters.replace("id=", "");
         parameters = parameters.replace("time_frame=", "");
-        var id = parameters.split("&")[0];
-        var timeFrame = parameters.split("&")[1];
+        id = parameters.split("&")[0];
+        timeFrame = parameters.split("&")[1];
+        if (timeFrame == "day") {
+          $("#dayBtn").addClass("ui-btn-active");
+        }
+        if (timeFrame == "week") {
+          $("#weekBtn").addClass("ui-btn-active");
+        }
+        if (timeFrame == "month") {
+          $("#monthBtn").addClass("ui-btn-active");
+        }
 //        alert("id " + id + " timeFrame " + timeFrame);
         doGetWhatsappSingleJson(id, timeFrame);
         //doGetWhatsappMainJson("day");
@@ -60,7 +69,7 @@
         //doGetWhatsappMainJson("day");
       });
 
-      
+
 
     </script>
 
@@ -134,7 +143,7 @@
       function populateWhatsappMain(json) {
         ////////////NUDE SECTION
         $("#whatsappNudeCountId").html(buildNudeCount(json.data.nude.count));
-        console.log("drawing data 4 id" + json.data.chats[0].id);
+        console.log("drawing data 4 id=" + json.data.chats[0].id);
         drawChart(json.data.chats[0].numbers, json.data.statistics.time_frame);
 //        $('#chatsListDiv').html(buildWhatsappChatList4Sly(json));
 //        startSly();
@@ -142,21 +151,23 @@
     </script>
 
     <script>
-//      function dayClicked() {
-//        doGetWhatsappSingleJson();
-//        console.log("wa day clicked");
-//        //          $("#dayBtn").addClass("ui-btn-active");
-//      }
-//      function weekClicked() {
-//        doGetWhatsappSingleJson();
-//        console.log("wa week clicked");
-//        //          $("#weekBtn").addClass("ui-btn-active");
-//      }
-//      function monthClicked() {
-//        console.log("wa month clicked");
-//        doGetWhatsappSingleJson();
-//        //          $("#monthBtn").addClass("ui-btn-active");
-//      }
+      function dayClicked() {
+        console.log("single wa day clicked");
+
+        doGetWhatsappSingleJson(id, 'day');
+        //          $("#dayBtn").addClass("ui-btn-active");
+      }
+      function weekClicked() {
+        console.log("single week clicked");
+
+        doGetWhatsappSingleJson(id, 'week');
+        //          $("#weekBtn").addClass("ui-btn-active");
+      }
+      function monthClicked() {
+        console.log("single month clicked");
+        doGetWhatsappSingleJson(id, 'month');
+        //          $("#monthBtn").addClass("ui-btn-active");
+      }
 
       function whatsappClicked() {
         console.log("whatsapp clicked");
@@ -190,7 +201,7 @@
       <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" >
         <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
           <ul>
-            <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active">Day</a></li>
+            <li><a href="#" onclick="dayClicked()" id="dayBtn">Day</a></li>
             <li><a href="#" onclick="weekClicked()" id="weekBtn">Week</a></li>
             <li><a href="#" onclick="monthClicked()" id="monthBtn">Month</a></li>
           </ul>
@@ -219,7 +230,7 @@
               <div class="col-2"><img id='whatsappNudeIconId' src='../images/alertNudeIcon.png' style="max-width:50%;" alt='-'/></div>
               <div class="col-10"><label id='whatsappNudeSection' class="my-label-m"><b>Nude Alert</b></label></div>
               <div class="col-2"></div>
-              <div class="col-5"><label id='whatsappNudeCountId' class="my-label-s">-</label></div>
+              <div class="col-5"><label id='whatsappNudeCountId' class="my-label-m">-</label></div>
             </div>
           </div>
         </div> <!-- p2r div -->
