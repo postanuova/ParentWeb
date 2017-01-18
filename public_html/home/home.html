@@ -285,14 +285,15 @@
           contentType: 'application/json',
           error: function (jqXHR, textStatus, errorThrown) {
             console.log("doGetAccountJson error");
-            deviceAR = "[{'id':'356a192b7913b04c54574d18c28d46e6395428ab','name':'iPhonediAle'},{'id':'da4b9237bacccdf19c0760cab7aec4a8359010b0','name':'iPhonediJoe'},{'id':'77de68daecd823babbb58edb1c8e14d7106e83bb','name':'iPhone','profiled':false}]";
-    deviceAR = JSON.parse(deviceAR);        
-    console.log(deviceAR);
-            populateDeviceMenu(deviceAR);
+//            deviceAR = "{\"devices\":[{\"id\":\"356a192b7913b04c54574d18c28d46e6395428ab\",\"name\":\"iPhonediAle\"},{\"id\":\"da4b9237bacccdf19c0760cab7aec4a8359010b0\",\"name\":\"iPhonediJoe\"},{\"id\":\"77de68daecd823babbb58edb1c8e14d7106e83bb\",\"name\":\"iPhone\",\"profiled\":false}]}";
+//
+//            deviceAR = JSON.parse(deviceAR);        
+//    console.log(deviceAR);
+//            populateDeviceMenu(deviceAR);
           },
           success: function (json, textStatus, jqXHR) {
             console.log("doGetAccountJson success");
-            //alert("json.data.account.first_name " + json.data.account.first_name);
+            alert("json.data.account.first_name " + json.data.account.first_name);
             //alert("success data " + json);
             //var jsonObject = eval('(' + data + ')');
             populateDeviceMenu(json);
@@ -314,9 +315,9 @@
 //        }
 
       function populateDeviceMenu(json) {
-        console.log("populateDeviceMenu + json " + json);
-//        var deviceAR = json.account.devices;
-        var deviceAR = json;
+        console.log("populateDeviceMenu + json " + json.devices);
+       var deviceAR = json.data.devices;
+       //var deviceAR = json;
         var template = $.templates("#deviceListTemplate");
         var htmlOutput = template.render(deviceAR);
         htmlOutput = "<form>" +
@@ -402,7 +403,7 @@
               <form>
                 <div class="ui-field-contain" >
                   <select name="select-native-1" id="select-native-1" style="background: #5AC9FA">
-                    <option value="1">IPhone di Ale</option>
+                    <option value="1">IPhone di xXx</option>
                     <option value="2">The 2nd Option</option>
                     <option value="3">The 3rd Option</option>
                     <option value="4">The 4th Option</option>
