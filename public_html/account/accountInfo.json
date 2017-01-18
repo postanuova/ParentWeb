@@ -1,0 +1,59 @@
+{
+  "meta": [],
+  "data": {
+    "account": {
+      "first_name": "Ale",
+      "last_name": "Ale",
+      "email": "ale@ale.com",
+      "phone_number": "34600000000",
+      "parent_role": 1,
+      "subscription": {
+        "active": false,
+        "name": "TeenGuard Premum",
+        "product": "TeenGuard_Premium_Trial",
+        "trial": true
+      },
+      "max_devices": 5
+    },
+    "devices": [
+      {
+        "id": "356a192b7913b04c54574d18c28d46e6395428ab",
+        "name": "iPhone di Ale"
+      },
+      {
+        "id": "da4b9237bacccdf19c0760cab7aec4a8359010b0",
+        "name": "iPhone di Joe"
+      },
+      {
+        "id": "77de68daecd823babbb58edb1c8e14d7106e83bb",
+        "name": "iPhone",
+        "profiled": false
+      }
+    ],
+    "profiles": [
+      {
+        "id": "1",
+        "name": "Ale",
+        "gender": "M",
+        "birthdate": "20010415"
+      },
+      {
+        "id": "2",
+        "name": "Joe",
+        "gender": "F",
+        "birthdate": "20010523"
+      }
+    ],
+    "app_notifications": {
+      "geofence": true,
+      "whatsapp_nude": true,
+      "photo_nude": true
+    },
+    "mail_notifications": {
+      "commercial": true
+    }
+  },
+  "pagination": {
+    "eof": true
+  }
+}

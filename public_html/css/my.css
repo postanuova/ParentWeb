@@ -113,3 +113,8 @@ and open the template in the editor.
   overflow: auto; 
   -webkit-overflow-scrolling:touch;   
 }
+
+/*header style*/
+.ui-page .ui-header {
+    background: #5AC9FA !important;
+}

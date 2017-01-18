@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--hello-->
 <html>
   <head>
     <title>ParentWeb</title>
@@ -294,10 +295,7 @@
           success: function (json, textStatus, jqXHR) {
             console.log("doGetAccountJson success");
             alert("json.data.account.first_name " + json.data.account.first_name);
-            //alert("success data " + json);
-            //var jsonObject = eval('(' + data + ')');
             populateDeviceMenu(json);
-            //alert();
           }
         });
       }
