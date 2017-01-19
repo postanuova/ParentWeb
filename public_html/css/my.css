@@ -116,5 +116,12 @@ and open the template in the editor.
 
 /*header style*/
 .ui-page .ui-header {
-    background: #5AC9FA !important;
+  background: #5AC9FA !important;
 }
+
+.my-header-select {
+  border-color: #5AC9FA;
+  background: #5AC9FA;
+  color:#FFFFFF;
+}
+

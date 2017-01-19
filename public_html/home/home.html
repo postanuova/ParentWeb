@@ -40,7 +40,7 @@
       //var url = "https://www.googleapis.com/books/v1/volumes/zyTCAlFPjgYC";// to receive json
 
       window.onload = function (e) {
-        
+
         dayClicked();
         //doGetAccountJson();
       };
@@ -50,7 +50,7 @@
       $(document).ready(function () {
         console.log("ready");
         p2rAndLoadingOverlay();
-        
+
         doGetAccountJson();
       });
 
@@ -294,7 +294,6 @@
           },
           success: function (json, textStatus, jqXHR) {
             console.log("doGetAccountJson success");
-            alert("json.data.account.first_name " + json.data.account.first_name);
             populateDeviceMenu(json);
           }
         });
@@ -314,13 +313,13 @@
 
       function populateDeviceMenu(json) {
         console.log("populateDeviceMenu + json " + json.devices);
-       var deviceAR = json.data.devices;
-       //var deviceAR = json;
+        var deviceAR = json.data.devices;
+        //var deviceAR = json;
         var template = $.templates("#deviceListTemplate");
         var htmlOutput = template.render(deviceAR);
         htmlOutput = "<form>" +
                 "<div class='ui-field-contain' >" +
-                "<select name='select-native-1' id='select-native-1' style='background: #5AC9FA'>" +
+                "<select name='select-native-1' id='select-native-1' class='my-header-select'>" +
                 htmlOutput +
                 "</select>" +
                 "</div>" +
@@ -392,35 +391,33 @@
     <!-- ***************************** HOME PAGE***************************** -->
     <div id="homePage" data-role="page">
 
-      <div  data-role="header" data-id="fixedHeader" data-position="fixed" data-theme="a">
-        <div class="grid">
-          <div class="col-4"></div>
-          <div class="col-4">
-            <div id="deviceMenuDiv" style="background: #5AC9FA">
-              <!--http://demos.jquerymobile.com/1.4.1/selectmenu/#&ui-state=dialog-->
-              <form>
-                <div class="ui-field-contain" >
-                  <select name="select-native-1" id="select-native-1" style="background: #5AC9FA">
-                    <option value="1">IPhone di xXx</option>
-                    <option value="2">The 2nd Option</option>
-                    <option value="3">The 3rd Option</option>
-                    <option value="4">The 4th Option</option>
-                  </select>
-                </div>
-              </form>
-            </div>
+      <div  data-role="header" data-id="fixedHeader" data-position="fixed" data-content-theme="a" data-theme="a">
+        <h1> 
+          <div id="deviceMenuDiv" style="background: #5AC9FA">
+
+            <!--http://demos.jquerymobile.com/1.4.1/selectmenu/#&ui-state=dialog-->
+
+            <form> 
+              <div class='ui-field-contain' > 
+                <select name='select-native-1' id='select-native-1' style='background-color: #5AC9FA;  color:#FFFFFF;' >
+                  <option value='1'>Iphone</option>
+                  <option value='1'>bbb</option>
+                  <option value='1'>ccc</option>
+                </select> 
+              </div> 
+            </form>
+
           </div>
-          <div class="col-4">
-            <a href="../account/accountInfo.html" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Options</a>
-          </div>
+        </h1>
+        <a href="../account/accountInfo.html" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Options</a>
+
+        <div id="headerNavbarId" data-role="navbar" style=" width: 100%;" >
+          <ul>
+            <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active" style="border-color: white;border-top-width: 3px">Day</a></li>
+            <li><a href="#" onclick="weekClicked()" id="weekBtn" style="border-color: white;border-top-width: 3px">Week</a></li>
+            <li><a href="#" onclick="monthClicked()" id="monthBtn" style="border-color: white;border-top-width: 3px">Month</a></li>
+          </ul>
         </div>
-      </div>
-      <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
-        <ul>
-          <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active">Day</a></li>
-          <li><a href="#" onclick="weekClicked()" id="weekBtn">Week</a></li>
-          <li><a href="#" onclick="monthClicked()" id="monthBtn">Month</a></li>
-        </ul>
       </div>
 
       <div role="main"  class="ui-content">
