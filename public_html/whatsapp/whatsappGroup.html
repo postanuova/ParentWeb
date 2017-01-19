@@ -34,15 +34,36 @@
     <link rel="stylesheet" href="../js/loading-overlay/loadingoverlay.css"/>
     <script>
       //GLOBAL VARIABLES
-      var whatsappMainUrl = "http://92.222.83.28/parent/whatsapp.php";
+      var whatsappGroupUrl = "http://92.222.83.28/parent/whatsapp.php";
+      var whatsappGroupParticipantsUrl = "http://92.222.83.28/parent/whatsapp_participants.php";
+
+      var timeFrame = "unkonwn";
+      var groupId = "unknown";//?group_id=1320340042
 
 
 
       window.onload = function (e) {
-        console.log("onload");
-        dayClicked();
+        //http://stackoverflow.com/questions/16518912/pass-parameter-between-pages-using-jquery-mobile
+        console.log("onload this page url " + window.location.href);
+        var parameters = window.location.href.split("?")[1];
+        parameters = parameters.replace("group_id=", "");
+        parameters = parameters.replace("time_frame=", "");
+        groupId = parameters.split("&")[0];
+        timeFrame = parameters.split("&")[1];
+        if (timeFrame == "day") {
+          $("#dayBtn").addClass("ui-btn-active");
+        }
+        if (timeFrame == "week") {
+          $("#weekBtn").addClass("ui-btn-active");
+        }
+        if (timeFrame == "month") {
+          $("#monthBtn").addClass("ui-btn-active");
+        }
+        alert("groupId " + groupId + " timeFrame " + timeFrame);
+        doGetWhatsappGroupJson(groupId, timeFrame);
         //doGetWhatsappMainJson("day");
       };
+      
       $(document).ready(function () {
         console.log("ready");
         dayClicked();
@@ -157,8 +178,8 @@
       }
 
 
-      function buildWhatsappChatList4Sly(json) {
-        var chatsAR = json.data.chats;
+      function buildWhatsappParticipantsList4Sly(json) {
+        var chatsAR = json.data.participants;
         var template = $.templates("#contactVerticalTemplate");
         var htmlOutput = template.render(chatsAR);
         htmlOutput = "<ul class='slidee' style='list-style-type: none;'>" +
@@ -174,58 +195,98 @@
       function ciao() {
         //window.alert("callback ciao");
       }
-      function doGetWhatsappMainJson(timeFrame) {
-        console.log("doGetWhatsappMainJson " + timeFrame);
+      function doGetWhatsappGroupJson(groupId,timeFrame) {
+        //participants, nudes
+        console.log("doGetWhatsappGroupJson " + timeFrame);
         $.ajax({
-          url: whatsappMainUrl,
+          url: whatsappGroupUrl,
           type: 'GET',
           crossDomain: true,
           jsonp: 'callback',
           jsonpCallback: 'ciao',
-          data: "time_frame=" + timeFrame,
+          data: "time_frame=" + timeFrame + "&group_id=" + groupId,
           dataType: 'jsonp',
 //            data: {
 //           format: 'jsonp'
 //           },
           contentType: 'application/json',
           error: function (jqXHR, textStatus, errorThrown) {
-            window.alert("error");
+            window.alert("doGetWhatsappGroupJson error");
           },
           success: function (json, textStatus, jqXHR) {
-            console.log("success data time_frame=" + json.data.statistics.time_frame);
-            for(var i=0;i<json.data.chats.length;i++) {
-                json.data.chats[i].time_frame=json.data.statistics.time_frame;
-                console.log(i + " " + json.data.chats[i].time_frame);
-              }
-            populateWhatsappMain(json);
+            console.log("doGetWhatsappGroupJson success data time_frame=" + json.data.statistics.time_frame);
+
+            populateWhatsappGroupJson(json);
           }
         });
       }
 
-      function populateWhatsappMain(json) {
+      function populateWhatsappGroupJson(json) {
         ////////////NUDE SECTION
         $("#whatsappNudeCountId").html(buildNudeCount(json.data.nude.count));
-        //alert(json.data.statistics.numbers);
+        ////CHART   
         drawChart(json.data.statistics.numbers, json.data.statistics.time_frame);
-        $('#chatsListDiv').html(buildWhatsappChatList4Sly(json));
+        doGetWhatsappGroupParticipantsJson(groupId);
+
+      }
+
+      function doGetWhatsappGroupParticipantsJson(groupId) {
+        //participants, nudes
+        console.log("doGetWhatsappGroupParticipantsJson groupId " + groupId);
+        $.ajax({
+          url: whatsappGroupUrl,
+          type: 'GET',
+          crossDomain: true,
+          jsonp: 'callback',
+          jsonpCallback: 'ciao',
+          data: "groupId=" + groupId,
+          dataType: 'jsonp',
+//            data: {
+//           format: 'jsonp'
+//           },
+          contentType: 'application/json',
+          error: function (jqXHR, textStatus, errorThrown) {
+            window.alert("doGetWhatsappGroupParticipantsJson error");
+          },
+          success: function (json, textStatus, jqXHR) {
+            console.log("doGetWhatsappGroupParticipantsJson success data time_frame=" + json.data.participants[0].first_name);
+
+            populateWhatsappGroupParticipants(json);
+          }
+        });
+      }
+
+      function populateWhatsappGroupParticipants(json) {
+        ////////////NUDE SECTION
+        console.log("populateWhatsappGroupJson");
+        $("#whatsappNudeCountId").html(buildNudeCount(json.data.nude.count));
+        //DRAW GRAPH
+        drawChart(json.data.statistics.numbers, json.data.statistics.time_frame);
+
+      }
+
+      function populateWhatsappGroupParticipants(json) {
+        console.log("populateWhatsappGroupParticipants");
+        $('#chatsListDiv').html(buildWhatsappParticipantsList4Sly(json));
         startSly();
       }
+
     </script>
 
     <script>
       function dayClicked() {
-        doGetWhatsappMainJson('day');
-        console.log("wa day clicked");
+        doGetWhatsappGroupJson('day');
+        console.log("wa group day clicked");
         //          $("#dayBtn").addClass("ui-btn-active");
       }
       function weekClicked() {
-        doGetWhatsappMainJson('week');
-        console.log("wa week clicked");
+        doGetWhatsappGroupJson('week');
+        console.log("wa group week clicked");
         //          $("#weekBtn").addClass("ui-btn-active");
       }
       function monthClicked() {
-        console.log("wa month clicked");
-        doGetWhatsappMainJson('month');
+        console.log("wa group month clicked");
+        doGetWhatsappGroupJson('month');
         //          $("#monthBtn").addClass("ui-btn-active");
       }
 

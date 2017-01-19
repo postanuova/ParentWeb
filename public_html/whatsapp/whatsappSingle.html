@@ -143,6 +143,7 @@
       function populateWhatsappMain(json) {
         ////////////NUDE SECTION
         $("#whatsappNudeCountId").html(buildNudeCount(json.data.nude.count));
+        $("#deviceMenuDiv").html(json.data.chats[0].first_name + " " + json.data.chats[0].last_name + " " + json.data.chats[0].phone_number);
         console.log("drawing data 4 id=" + json.data.chats[0].id);
         drawChart(json.data.chats[0].numbers, json.data.statistics.time_frame);
 //        $('#chatsListDiv').html(buildWhatsappChatList4Sly(json));
@@ -198,15 +199,24 @@
       <!-- popup -->
 
 
-      <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" >
-        <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
+      <div  data-role="header" data-id="fixedHeader" data-position="fixed" data-content-theme="a" data-theme="a">
+        <h1>
+          Whatsapp
+          <div id="deviceMenuDiv" style="background: #5AC9FA">
+            Whatsapp
+          </div>
+        </h1>
+        <a href="../account/accountInfo.html" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Options</a>
+
+        <div id="headerNavbarId" data-role="navbar" style=" width: 100%;" >
           <ul>
-            <li><a href="#" onclick="dayClicked()" id="dayBtn">Day</a></li>
-            <li><a href="#" onclick="weekClicked()" id="weekBtn">Week</a></li>
-            <li><a href="#" onclick="monthClicked()" id="monthBtn">Month</a></li>
+            <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active" style="border-color: white;border-top-width: 3px">Day</a></li>
+            <li><a href="#" onclick="weekClicked()" id="weekBtn" style="border-color: white;border-top-width: 3px">Week</a></li>
+            <li><a href="#" onclick="monthClicked()" id="monthBtn" style="border-color: white;border-top-width: 3px">Month</a></li>
           </ul>
         </div>
       </div>
+
 
       <div role="main" class="ui-content">
         <div class="p2rDiv">

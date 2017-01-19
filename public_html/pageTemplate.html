@@ -47,15 +47,24 @@
     <!-------------------------------HOME PAGE------------------------------------------- -->
     <div id="homePage" data-role="page">
 
-      <div id="header" data-role="header" data-theme="a" data-position="fixed">
-        <div id="headerNavbarId" data-role="navbar" >
+      <div  data-role="header" data-id="fixedHeader" data-position="fixed" data-content-theme="a" data-theme="a">
+        <h1>
+          Page Title
+          <div id="deviceMenuDiv" style="background: #5AC9FA">
+            Title content
+          </div>
+        </h1>
+        <a href="../account/accountInfo.html" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Options</a>
+
+        <div id="headerNavbarId" data-role="navbar" style=" width: 100%;" >
           <ul>
-            <li><a href="#" data-iconshadow="false" class="ui-btn-active" >Day</a></li>
-            <li><a href="#" data-iconshadow="false">Week</a></li>
-            <li><a href="#" data-iconshadow="false">Month</a></li>
+            <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active" style="border-color: white;border-top-width: 3px">Day</a></li>
+            <li><a href="#" onclick="weekClicked()" id="weekBtn" style="border-color: white;border-top-width: 3px">Week</a></li>
+            <li><a href="#" onclick="monthClicked()" id="monthBtn" style="border-color: white;border-top-width: 3px">Month</a></li>
           </ul>
         </div>
       </div>
+
 
       <div role="main" class="ui-content">
         <h1>Home Page</h1>
