@@ -36,8 +36,19 @@
       var homeUrl = "http://92.222.83.28/parent/home2.php";
 
       window.onload = function (e) {
-        window.alert("window on load");
+        //http://stackoverflow.com/questions/16518912/pass-parameter-between-pages-using-jquery-mobile
+        console.log("onload this page url " + window.location.href);
+        var parameters = window.location.href.split("?")[1];
+        parameters = parameters.replace("group_id=", "");
+        parameters = parameters.replace("time_frame=", "");
+        groupId = parameters.split("&")[0];
+        timeFrame = parameters.split("&")[1];
+        alert("groupId " + groupId + " timeFrame " + timeFrame);
+        enableOnlyButton(timeFrame);
+        doGetWhatsappGroupJson(groupId, timeFrame);
+        doGetWhatsappGroupParticipantsJson(groupId);
       };
+
       $(document).ready(function () {
         window.alert("document.ready");
       });
@@ -48,10 +59,9 @@
     <div id="homePage" data-role="page">
 
       <div  data-role="header" data-id="fixedHeader" data-position="fixed" data-content-theme="a" data-theme="a">
-        <h1>
-          Page Title
+        <h1> 
           <div id="deviceMenuDiv" style="background: #5AC9FA">
-            Title content
+            Home
           </div>
         </h1>
         <a href="../account/accountInfo.html" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Options</a>
@@ -64,7 +74,7 @@
           </ul>
         </div>
       </div>
-
+      <br/>
 
       <div role="main" class="ui-content">
         <h1>Home Page</h1>

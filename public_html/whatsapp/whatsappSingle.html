@@ -49,15 +49,7 @@
         parameters = parameters.replace("time_frame=", "");
         id = parameters.split("&")[0];
         timeFrame = parameters.split("&")[1];
-        if (timeFrame == "day") {
-          $("#dayBtn").addClass("ui-btn-active");
-        }
-        if (timeFrame == "week") {
-          $("#weekBtn").addClass("ui-btn-active");
-        }
-        if (timeFrame == "month") {
-          $("#monthBtn").addClass("ui-btn-active");
-        }
+        enableOnlyButton(timeFrame);
 //        alert("id " + id + " timeFrame " + timeFrame);
         doGetWhatsappSingleJson(id, timeFrame);
         //doGetWhatsappMainJson("day");
