@@ -99,37 +99,21 @@
     </script>
 
     <script id="contactVerticalTemplate" type="text/x-jsrender">
-      {{if first_name}}
-
-      <li>
-      <a href="../whatsapp/whatsappSingle.html?id={{:id}}&time_frame={{:time_frame}}" data-ajax="false" data-transition="pop" style="text-decoration: none">
-      <div class="grid">
-      <div class="col-2">
-      <img src='../../images/circleLightGreenIcon.png' style="max-width:30%;" alt=''/>
-      </div>
-      <div class="col-5">
-      <label class="my-label-m"><b>{{:first_name}} {{:last_name}}</b></label>
-      </div>
-      <div class="col-1">
-      <label class="my-label-m"><em>{{:count}}</em></label>
-      </div>
-      <div class="col-4">
-      {{if has_text}} 
-      <img src='../../images/whatsappHasMessage.png' style='max-width:10%;' alt='-'/>
-      {{/if}}
-      {{if has_image}}
-      &nbsp;<img src='../../images/whatsappHasPicture.png' style='max-width:10%;' alt='-'/>
-      {{/if}}
-      {{if has_video}}
-      &nbsp;<img src='../../images/photoHasVideo.png' style='max-width:10%;' alt='-'/>
-      {{/if}}
-      {{if has_audio}}
-      &nbsp;<img src='../../images/whatsappHasVocalMessage.png' style='max-width:10%;' alt='-'/>
-      {{/if}}
-      </div>
-      </div>
-      </a>
-      </li>
+        <li>
+          <div class="grid">
+            <div class="col-2">
+              <img src='../../images/circleLightGreenIcon.png' style="max-width:30%;" alt=''/>
+            </div>
+            <div class="col-5">
+              <label class="my-label-m"><b>{{:first_name}} {{:last_name}}</b></label>
+            </div>
+            <div class="col-5">
+              {{if is_admin}} 
+                <label class="my-label-m"><b>admin</b></label>
+              {{/if}}
+            </div>
+          </div>
+        </li>
     </script>
 
     <script>
@@ -310,12 +294,19 @@
       <!-- popup -->
 
 
-      <div id="header" data-role="header" data-id="fixedHeader" data-theme="a" >
-        <div id="headerNavbarId" data-role="navbar" style=" width: 100%" >
+      <div  data-role="header" data-id="fixedHeader" data-position="fixed" data-content-theme="a" data-theme="a">
+        <h1>
+          <div id="deviceMenuDiv" style="background: #5AC9FA">
+            Whatsapp Group
+          </div>
+        </h1>
+        <a href="../account/accountInfo.html" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Options</a>
+
+        <div id="headerNavbarId" data-role="navbar" style=" width: 100%;" >
           <ul>
-            <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active">Day</a></li>
-            <li><a href="#" onclick="weekClicked()" id="weekBtn">Week</a></li>
-            <li><a href="#" onclick="monthClicked()" id="monthBtn">Month</a></li>
+            <li><a href="#" onclick="dayClicked()" id="dayBtn" class="ui-btn-active" style="border-color: white;border-top-width: 3px">Day</a></li>
+            <li><a href="#" onclick="weekClicked()" id="weekBtn" style="border-color: white;border-top-width: 3px">Week</a></li>
+            <li><a href="#" onclick="monthClicked()" id="monthBtn" style="border-color: white;border-top-width: 3px">Month</a></li>
           </ul>
         </div>
       </div>
