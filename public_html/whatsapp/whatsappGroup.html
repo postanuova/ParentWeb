@@ -50,23 +50,15 @@
         parameters = parameters.replace("time_frame=", "");
         groupId = parameters.split("&")[0];
         timeFrame = parameters.split("&")[1];
-        if (timeFrame == "day") {
-          $("#dayBtn").addClass("ui-btn-active");
-        }
-        if (timeFrame == "week") {
-          $("#weekBtn").addClass("ui-btn-active");
-        }
-        if (timeFrame == "month") {
-          $("#monthBtn").addClass("ui-btn-active");
-        }
         alert("groupId " + groupId + " timeFrame " + timeFrame);
+        enableOnlyButton(timeFrame);
         doGetWhatsappGroupJson(groupId, timeFrame);
-        //doGetWhatsappMainJson("day");
+        doGetWhatsappGroupParticipantsJson(groupId);
       };
-      
+
       $(document).ready(function () {
         console.log("ready");
-        dayClicked();
+        //dayClicked();
         //doGetWhatsappMainJson("day");
       });
     </script>
@@ -195,7 +187,7 @@
       function ciao() {
         //window.alert("callback ciao");
       }
-      function doGetWhatsappGroupJson(groupId,timeFrame) {
+      function doGetWhatsappGroupJson(groupId, timeFrame) {
         //participants, nudes
         console.log("doGetWhatsappGroupJson " + timeFrame);
         $.ajax({
@@ -226,7 +218,7 @@
         $("#whatsappNudeCountId").html(buildNudeCount(json.data.nude.count));
         ////CHART   
         drawChart(json.data.statistics.numbers, json.data.statistics.time_frame);
-        doGetWhatsappGroupParticipantsJson(groupId);
+        //doGetWhatsappGroupParticipantsJson(groupId);
 
       }
 
@@ -234,12 +226,12 @@
         //participants, nudes
         console.log("doGetWhatsappGroupParticipantsJson groupId " + groupId);
         $.ajax({
-          url: whatsappGroupUrl,
+          url: whatsappGroupParticipantsUrl,
           type: 'GET',
           crossDomain: true,
           jsonp: 'callback',
           jsonpCallback: 'ciao',
-          data: "groupId=" + groupId,
+          data: "group_id=" + groupId,
           dataType: 'jsonp',
 //            data: {
 //           format: 'jsonp'

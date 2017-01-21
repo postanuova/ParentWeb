@@ -40,13 +40,12 @@
 
       window.onload = function (e) {
         console.log("onload");
-        dayClicked();
-        //doGetWhatsappMainJson("day");
       };
+
       $(document).ready(function () {
         console.log("ready");
         dayClicked();
-        //doGetWhatsappMainJson("day");
+        doGetAccountJson();
       });
     </script>
 
@@ -83,6 +82,10 @@
           });
         });
       }
+    </script>
+
+    <script id="deviceListTemplate" type="text/x-jsrender">
+      <option value='{{:id}}'>{{:name}}</option>
     </script>
 
     <script id="contactVerticalTemplate" type="text/x-jsrender">
@@ -273,10 +276,11 @@
 
 
       <div  data-role="header" data-id="fixedHeader" data-position="fixed" data-content-theme="a" data-theme="a">
-        <h1>
-          Whatsapp Chats
+        <h1> 
           <div id="deviceMenuDiv" style="background: #5AC9FA">
-            Whatsapp
+
+            <!--http://demos.jquerymobile.com/1.4.1/selectmenu/#&ui-state=dialog-->
+            Whatsapp Main
           </div>
         </h1>
         <a href="../account/accountInfo.html" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Options</a>
