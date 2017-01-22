@@ -113,3 +113,32 @@ function populateDeviceMenu(json) {
   //console.log(htmlOutput);
   $("#deviceMenuDiv").html(htmlOutput);
 }
+/**
+ * 
+ * @param {type} time
+ * @returns {String} convert 1234 to 12:34
+ */
+function buildTimeString(time) {
+  return time.substring(0, 2) + ":" + time.substring(2, 4);
+}
+
+function buildWeekDaysString(week) {
+
+  var daysAR = ["M ", "T ", "W ", "T ", "F ", "S ", "S "];
+  var binaryAR = [];
+  var weekDays = "";
+  //var binaryAR = (week).toString(2);
+  for (var i = 0; i < 7; i++) {
+    binaryAR[i] = (week >> i) & 1;
+  }
+
+  for (var i = 0; i < binaryAR.length; i++) {
+    if (binaryAR[i] == 1) {
+      weekDays += "<b>" + daysAR[i] + "</b>";
+    } else {
+      weekDays += "<font color='#CCCCCC'>" + daysAR[i] + "</font>";
+    }
+  }
+  console.log("dec " + week + " weekDays " + weekDays);
+  return weekDays;
+}

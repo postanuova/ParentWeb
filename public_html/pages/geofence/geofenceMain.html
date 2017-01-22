@@ -40,105 +40,42 @@
 
       window.onload = function (e) {
         console.log("onload");
+        doGetAccountJson();
       };
 
       $(document).ready(function () {
-        console.log("ready");
-        dayClicked();
-        doGetAccountJson();
+        console.log("ready: reactivate doGetAccountJson");
+        doGetGeofenceMainJson();
+        
       });
     </script>
 
-    <script>
-      function drawChart(numbersAR, timeFrame) {
-        $(function () {
-          var myChart = Highcharts.chart('whatsappChartDiv', {
-            chart: {
-              type: 'area'
-            },
-            title: {
-              text: ' '
-            },
-            xAxis: {
-//            categories: ['Apples', 'Bananas', 'Oranges']
-            },
-            yAxis: {
-              title: {
-                text: 'Chats'
-              }
-            },
-            series: [{
-                name: timeFrame,
-//            color:'#32B92A',
-                color: {
-                  linearGradient: {x1: 0, x2: 0, y1: 0, y2: 1},
-                  stops: [
-                    [0, '#32B92A'],
-                    [1, '#FFFFFF']
-                  ]
-                },
-                data: numbersAR
-              }]
-          });
-        });
-      }
-    </script>
+
 
     <script id="deviceListTemplate" type="text/x-jsrender">
       <option value='{{:id}}'>{{:name}}</option>
     </script>
 
-    <script id="contactVerticalTemplate" type="text/x-jsrender">
-      {{if first_name}}
-
+    <script id="geofenceVerticalTemplate" type="text/x-jsrender">
       <li>
-      <a href="../whatsapp/whatsappSingle.html?id={{:id}}&time_frame={{:time_frame}}" data-ajax="false" data-transition="pop" style="text-decoration: none">
-      <div class="grid">
-      <div class="col-2">
-      <img src='../../images/circleLightGreenIcon.png' style="max-width:30%;" alt=''/>
-      </div>
-      <div class="col-5">
-      <label class="my-label-m"><b>{{:first_name}} {{:last_name}}</b></label>
-      </div>
-      <div class="col-1">
-      <label class="my-label-m"><em>{{:count}}</em></label>
-      </div>
-      <div class="col-4">
-      {{if has_text}} 
-      <img src='../../images/whatsappHasMessage.png' style='max-width:10%;' alt='-'/>
-      {{/if}}
-      {{if has_image}}
-      &nbsp;<img src='../../images/whatsappHasPicture.png' style='max-width:10%;' alt='-'/>
-      {{/if}}
-      {{if has_video}}
-      &nbsp;<img src='../../images/photoHasVideo.png' style='max-width:10%;' alt='-'/>
-      {{/if}}
-      {{if has_audio}}
-      &nbsp;<img src='../../images/whatsappHasVocalMessage.png' style='max-width:10%;' alt='-'/>
-      {{/if}}
-      </div>
-      </div>
-      </a>
+        <a href="../geofence/geofenceSingle.html?id={{:id}}" data-ajax="false" data-transition="pop" style="text-decoration: none">
+          <div class="grid">
+            <div class="col-2"><img src='../../images/geofenceIcon.png' style="max-width:20%;" alt=''/></div>
+            <div class="col-4"><label class="my-label-m"><b>{{:id}}</b></label></div>
+            <div class="col-3"><label class="my-label-m"><em>{{:start}}-{{:stop}}</em></label></div>
+          <div class="col-3"><label class="my-label-m"><em>{{:week}}</em></label></div>
+          </div>
+
+
+          </div>
+        </a>
       </li>
 
-      {{/if}}
-      {{if is_group}}
-      <li style="width: 100px;">
-      <div class="grid">
-      <div class="col-5">
-      <img src='../../images/circleLightOrangeIcon.png' style="max-width:30%;" alt='-'/>
-      </div>
-      <div class="col-7">
-      <label class="my-label-m">{{:title}}</label>
-      </div>
-      </div>
-      </li>
-      {{/if}}
     </script>
 
     <script>
       function startSly() {
-        var contactDiv = $("#chatsListDiv");
+        var contactDiv = $("#geofenceListDiv");
         contactDiv.sly('destroy');
         //'use strict';
         var sly = new Sly(contactDiv, {
@@ -174,10 +111,10 @@
       }
 
 
-      function buildWhatsappChatList4Sly(json) {
-        var chatsAR = json.data.chats;
-        var template = $.templates("#contactVerticalTemplate");
-        var htmlOutput = template.render(chatsAR);
+      function buildGeofenceList4Sly(json) {
+        var geofenceAR = json.data;
+        var template = $.templates("#geofenceVerticalTemplate");
+        var htmlOutput = template.render(geofenceAR);
         htmlOutput = "<ul class='slidee' style='list-style-type: none;'>" +
                 htmlOutput +
                 "</ul>";
@@ -191,58 +128,55 @@
       function ciao() {
         //window.alert("callback ciao");
       }
-      function doGetWhatsappMainJson(timeFrame) {
-        console.log("doGetWhatsappMainJson " + timeFrame);
+      function doGetGeofenceMainJson() {
+        console.log("doGetGeofenceMainJson ");
         $.ajax({
-          url: whatsappMainUrl,
+          url: geofenceMainUrl,
           type: 'GET',
           crossDomain: true,
           jsonp: 'callback',
           jsonpCallback: 'ciao',
-          data: "time_frame=" + timeFrame,
           dataType: 'jsonp',
 //            data: {
 //           format: 'jsonp'
 //           },
           contentType: 'application/json',
           error: function (jqXHR, textStatus, errorThrown) {
-            window.alert("error");
+            window.alert("doGetGeofenceMainJson error");
           },
           success: function (json, textStatus, jqXHR) {
-            console.log("success data time_frame=" + json.data.statistics.time_frame);
-            for (var i = 0; i < json.data.chats.length; i++) {
-              json.data.chats[i].time_frame = json.data.statistics.time_frame;
+            console.log("doGetGeofenceMainJson success json.data[0].id=" + json.data[0].id);
+            for (var i = 0; i < json.data.length; i++) {
+              json.data[i].start = buildTimeString(json.data[i].start);
+              json.data[i].stop = buildTimeString(json.data[i].stop);
+              json.data[i].week = buildWeekDaysString(json.data[i].week);
 //                console.log(i + " " + json.data.chats[i].time_frame);
             }
-            populateWhatsappMain(json);
+            populateGeofenceMain(json);
           }
         });
       }
 
-      function populateWhatsappMain(json) {
-        ////////////NUDE SECTION
-        $("#whatsappNudeCountId").html(buildNudeCount(json.data.nude.count));
-        //alert(json.data.statistics.numbers);
-        drawChart(json.data.statistics.numbers, json.data.statistics.time_frame);
-        $('#chatsListDiv').html(buildWhatsappChatList4Sly(json));
+      function populateGeofenceMain(json) {
+        $('#geofenceListDiv').html(buildGeofenceList4Sly(json));
         startSly();
       }
     </script>
 
     <script>
       function dayClicked() {
-        doGetWhatsappMainJson('day');
+        doGetGeofenceMainJson('day');
         console.log("wa day clicked");
         //          $("#dayBtn").addClass("ui-btn-active");
       }
       function weekClicked() {
-        doGetWhatsappMainJson('week');
+        doGetGeofenceMainJson('week');
         console.log("wa week clicked");
         //          $("#weekBtn").addClass("ui-btn-active");
       }
       function monthClicked() {
         console.log("wa month clicked");
-        doGetWhatsappMainJson('month');
+        doGetGeofenceMainJson('month');
         //          $("#monthBtn").addClass("ui-btn-active");
       }
 
@@ -279,7 +213,7 @@
           <div id="deviceMenuDiv" style="background: #5AC9FA">
 
             <!--http://demos.jquerymobile.com/1.4.1/selectmenu/#&ui-state=dialog-->
-            Geofeence Main
+            Geofence Main
           </div>
         </h1>
         <a href="../account/accountInfo.html" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Options</a>
@@ -292,7 +226,7 @@
           </ul>
         </div>
       </div>
-<br/>
+      <br/>
 
       <div role="main" class="ui-content">
         <div class="p2rDiv">
@@ -301,35 +235,36 @@
           <div data-role="collapsible-set"  class='my-collapsible'>
             <div class="grid">
               <div class="col-2"><img id='geofenceIconId' src='../../images/geofenceIcon.png' alt='-' style="max-width:50%;"/></div>
-              <div class="col-10"><label class="my-label-l" style="color: #FFA602" id='geofenceSection'>Geofence</label></div> 
-           </div>
-            
-          <!-- chat list sly -->
-          <div data-role="collapsible-set"  class='my-collapsible'>
-            <div class="grid">
-              <div class="col-11">
-                <div id="chatsListDiv"></div>
-              </div>
+              <div class="col-8"><label class="my-label-l" style="color: #FFA602" id='geofenceSection'>Geofence</label></div> 
+              <div class="col-2"><label class="my-label-m" style="color: #FFA602" id='geofenceAddSection'>+ Add</label></div>
             </div>
           </div>
-        </div> <!-- p2r div -->
-      </div><!-- /content -->
+            <!-- geofence list sly -->
+            <div data-role="collapsible-set"  class='my-collapsible'>
+              <div class="grid">
+                <div class="col-11">
+                  <div id="geofenceListDiv"></div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- p2r div -->
+        </div><!-- /content -->
 
-      <!-------------------------------FOOTER------------------------------------------- -->
-      <div data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
-        <div id="footerNavbarId" data-role="navbar" >
-          <ul>
-            <li><a href="../whatsapp/whatsappMain.html"  data-ajax="false" onclick="whatsappClicked()" id="whatsappBtn" data-transition="pop" data-icon="phone" data-iconpos="notext"></a></li>
-            <li><a href="../photo/photoMain.html" id="photoBtn" data-ajax="false" data-icon="camera"   data-iconpos="notext"></a></li>
-            <li><a href="../home/home.html" data-icon="home" id="homeBtn" data-iconpos="notext" ></a></li>
-            <li><a href="../visit/visitMain.html" data-icon="location" id="positionBtn" data-iconpos="notext"></a></li>
-            <li><a  href="../geofence/geofenceMain.html" onclick="loadGeofences()" class="ui-btn-active" id="geofenceBtn" data-icon="tag" data-iconpos="notext"></a></li>
-          </ul>
+        <!-------------------------------FOOTER------------------------------------------- -->
+        <div data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
+          <div id="footerNavbarId" data-role="navbar" >
+            <ul>
+              <li><a href="../whatsapp/whatsappMain.html"  data-ajax="false" onclick="whatsappClicked()" id="whatsappBtn" data-transition="pop" data-icon="phone" data-iconpos="notext"></a></li>
+              <li><a href="../photo/photoMain.html" id="photoBtn" data-ajax="false" data-icon="camera"   data-iconpos="notext"></a></li>
+              <li><a href="../home/home.html" data-icon="home" id="homeBtn" data-iconpos="notext" ></a></li>
+              <li><a href="../visit/visitMain.html" data-icon="location" id="positionBtn" data-iconpos="notext"></a></li>
+              <li><a  href="../geofence/geofenceMain.html" onclick="loadGeofences()" class="ui-btn-active" id="geofenceBtn" data-icon="tag" data-iconpos="notext"></a></li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <!-------------------------------/FOOTER------------------------------------------- -->
-    </div><!-- /page -->
-    <!-------------------------------/HOME PAGE------------------------------------------- -->
+        <!-------------------------------/FOOTER------------------------------------------- -->
+      </div><!-- /page -->
+      <!-------------------------------/HOME PAGE------------------------------------------- -->
 
   </body>
 </html>
