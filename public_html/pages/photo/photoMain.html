@@ -279,7 +279,7 @@
           <div id="deviceMenuDiv" style="background: #5AC9FA">
 
             <!--http://demos.jquerymobile.com/1.4.1/selectmenu/#&ui-state=dialog-->
-            Whatsapp Main
+            Geofeence Main
           </div>
         </h1>
         <a href="../account/accountInfo.html" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Options</a>
@@ -300,8 +300,8 @@
           <!-- WHATSAPP-->
           <div data-role="collapsible-set"  class='my-collapsible'>
             <div class="grid">
-              <div class="col-2"><img id='whatsappIconImage' src='../../images/whatsappIcon.png' alt='-' style="max-width:50%; "/></div>
-              <div class="col-10"><label style="color: #32B92A; " id='whatsappSectionLabel' class="my-label-l">Whatsapp</label></div> 
+              <div class="col-2"><img id='photoIconId' src='../../images/photoIcon.png' style="max-width:50%;" alt='-'/></div>
+              <div class="col-7"><label class="my-label-l" style="color: #FF4333" id='photoSection'>Photo</label></div>
             </div>
             <!-- chart -->
             <div class="grid">
@@ -334,9 +334,9 @@
       <div data-role="footer" data-id="fixedFooter" data-theme="a" data-position="fixed">
         <div id="footerNavbarId" data-role="navbar" >
           <ul>
-            <li><a href="../whatsapp/whatsappMain.html"  data-ajax="false" onclick="whatsappClicked()"class="ui-btn-active id="whatsappBtn" data-transition="pop" data-icon="phone" data-iconpos="notext"></a></li>
-            <li><a href="../photo/photoMain.html" id="photoBtn" data-ajax="false" data-icon="camera"   data-iconpos="notext"></a></li>
-            <li><a href="../home/home.html" data-icon="home" id="homeBtn" data-iconpos="notext"></a></li>
+            <li><a href="../whatsapp/whatsappMain.html"  data-ajax="false" onclick="whatsappClicked()" id="whatsappBtn" data-transition="pop" data-icon="phone" data-iconpos="notext"></a></li>
+            <li><a href="../photo/photoMain.html" id="photoBtn" data-ajax="false" data-icon="camera"  class="ui-btn-active" data-iconpos="notext"></a></li>
+            <li><a href="../home/home.html" data-icon="home" id="homeBtn" data-iconpos="notext" ></a></li>
             <li><a href="../visit/visitMain.html" data-icon="location" id="positionBtn " data-iconpos="notext"></a></li>
             <li><a  href="../geofence/geofenceMain.html" onclick="loadGeofences()" id="geofenceBtn" data-icon="tag" data-iconpos="notext"></a></li>
           </ul>

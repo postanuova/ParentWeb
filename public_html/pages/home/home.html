@@ -267,7 +267,7 @@
         });
       }
 
-      
+
 
       function populateHome(jsonHome) {
         $("#whatsappCountLabel").html(roundPlus(jsonHome.data.whatsapp.count));
@@ -347,7 +347,7 @@
           </ul>
         </div>
       </div>
-<br/>
+      <br/>
       <div role="main"  class="ui-content">
         <div class="p2rDiv">
           <!-- WHATSAPP-->
@@ -394,7 +394,6 @@
           <div data-role="collapsible-set"  class='my-collapsible'>
             <div class="grid">
               <div class="col-2"><img id='photoIconId' src='../../images/photoIcon.png' style="max-width:50%;" alt='-'/></div>
-
               <div class="col-7"><label class="my-label-l" style="color: #FF4333" id='photoSection'>Photo</label></div>
             </div>  
 
@@ -446,10 +445,10 @@
         <div id="footerNavbarId" data-role="navbar" style=" width: 100%">
           <ul>
             <li><a href="../whatsapp/whatsappMain.html"  data-ajax="false" onclick="whatsappClicked()" id="whatsappBtn" data-transition="pop" data-icon="phone" data-iconpos="notext"></a></li>
-            <li><a href="../home/home.html" id="photoBtn" data-ajax="false" data-icon="camera"   data-iconpos="notext"></a></li>
-            <li><a href="#" data-icon="home" id="homeBtn" data-iconpos="notext" class="ui-btn-active"></a></li>
-            <li><a href="#" data-icon="location" id="positionBtn " data-iconpos="notext"></a></li>
-            <li><a  href="#editGeofencesPage" onclick="loadGeofences()" id="geofenceBtn" data-icon="tag" data-iconpos="notext"></a></li>
+            <li><a href="../photo/photoMain.html" id="photoBtn" data-ajax="false" data-icon="camera"   data-iconpos="notext"></a></li>
+            <li><a href="../home/home.html" data-icon="home" id="homeBtn" data-iconpos="notext" class="ui-btn-active"></a></li>
+            <li><a href="../visit/visitMain.html" data-icon="location" id="positionBtn " data-iconpos="notext"></a></li>
+            <li><a  href="../geofence/geofenceMain.html" onclick="loadGeofences()" id="geofenceBtn" data-icon="tag" data-iconpos="notext"></a></li>
           </ul>
         </div>
       </div>
