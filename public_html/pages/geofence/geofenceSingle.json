@@ -1,0 +1,73 @@
+{
+  "url": "http://92.222.83.28/parent/geofences.php?id=Lincontro"
+}
+
+
+{
+  "meta": [],
+  "data": [
+    {
+      "id": "Lincontro",
+      "name": "Ristorante L'Incontro",
+      "latitude": 28.120483,
+      "longitude": -16.7775494,
+      "radius": 100,
+      "enter": true,
+      "leave": true,
+      "week": 51,
+      "start": "0248",
+      "stop": "2216"
+    },
+    {
+      "id": "Ale",
+      "name": "Ale",
+      "latitude": 28.1250742,
+      "longitude": -16.7779788,
+      "radius": 100,
+      "enter": true,
+      "leave": true,
+      "week": 52,
+      "start": "1039",
+      "stop": "2231"
+    },
+    {
+      "id": "SiamMall",
+      "name": "Centro Comercial Siam Mall",
+      "latitude": 28.0690565,
+      "longitude": -16.7249978,
+      "radius": 100,
+      "enter": true,
+      "leave": true,
+      "week": 2,
+      "start": "0016",
+      "stop": "1839"
+    },
+    {
+      "id": "Michele",
+      "name": "Ufficio di Michele",
+      "latitude": 28.1251502,
+      "longitude": -16.7394207,
+      "radius": 100,
+      "enter": true,
+      "leave": true,
+      "week": 14,
+      "start": "0016",
+      "stop": "2329"
+    },
+    {
+      "id": "ChiesaLosCristianos",
+      "name": "Parrocchia di Los Cristianos",
+      "latitude": 28.0521532,
+      "longitude": -16.7177612,
+      "radius": 100,
+      "enter": true,
+      "leave": true,
+      "week": 41,
+      "start": "1027",
+      "stop": "1834"
+    }
+  ],
+  "pagination": {
+    "eof": true
+  }
+}
